@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
 
 export const Route = createFileRoute("/media")({
   head: () => ({
@@ -12,6 +13,26 @@ export const Route = createFileRoute("/media")({
   component: MediaPage,
 });
 
+function useReveal() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { el.classList.add("revealed"); observer.unobserve(el); } },
+      { threshold: 0.15 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+  return ref;
+}
+
+function RevealSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const ref = useReveal();
+  return <div ref={ref} className={`reveal-on-scroll ${className}`}>{children}</div>;
+}
+
 const mediaItems = [
   { date: "March 2024", title: "APdS Architects Wins Best Residential Design Award 2024", source: "Architectural Digest India", type: "Award" },
   { date: "January 2024", title: "The Loft House Featured in AD100 Best Homes", source: "Architectural Digest", type: "Publication" },
@@ -24,27 +45,38 @@ const mediaItems = [
 function MediaPage() {
   return (
     <div className="pt-20">
-      <section className="mx-auto max-w-7xl px-6 py-16 lg:px-12 lg:py-24">
-        <p className="text-xs tracking-[0.3em] text-accent">PRESS & MEDIA</p>
-        <h1 className="mt-4 text-3xl font-extralight text-foreground md:text-5xl">In the Media</h1>
-      </section>
+      <RevealSection>
+        <section className="mx-auto max-w-7xl px-6 py-16 lg:px-12 lg:py-24">
+          <p className="text-xs tracking-[0.3em] text-accent">PRESS & MEDIA</p>
+          <h1 className="mt-4 text-3xl font-extralight text-foreground md:text-5xl">In the Media</h1>
+          <div className="mt-6 flex items-center gap-3">
+            <div className="h-px w-16 bg-accent" />
+            <div className="h-1.5 w-1.5 rotate-45 border border-accent" />
+          </div>
+        </section>
+      </RevealSection>
 
       <section className="mx-auto max-w-4xl px-6 pb-24 lg:px-12">
         <div className="flex flex-col">
           {mediaItems.map((item, i) => (
-            <article key={i} className="group cursor-pointer border-t border-border py-8 transition-colors hover:bg-secondary/30">
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-4">
-                    <span className="text-xs tracking-[0.15em] text-accent">{item.type.toUpperCase()}</span>
-                    <span className="text-xs text-muted-foreground">{item.date}</span>
+            <RevealSection key={i}>
+              <article className="group cursor-pointer border-t border-border py-8 px-4 transition-all hover:bg-secondary/30 hover:px-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-4">
+                      <span className="inline-flex items-center gap-2 text-xs tracking-[0.15em] text-accent">
+                        <span className="h-1 w-1 rounded-full bg-accent" />
+                        {item.type.toUpperCase()}
+                      </span>
+                      <span className="text-xs text-muted-foreground">{item.date}</span>
+                    </div>
+                    <h3 className="mt-3 text-lg font-light text-foreground transition-colors group-hover:text-accent">{item.title}</h3>
+                    <p className="mt-2 text-xs text-muted-foreground">{item.source}</p>
                   </div>
-                  <h3 className="mt-2 text-lg font-light text-foreground">{item.title}</h3>
-                  <p className="mt-1 text-xs text-muted-foreground">{item.source}</p>
+                  <span className="mt-4 text-muted-foreground transition-all group-hover:translate-x-1 group-hover:text-accent">→</span>
                 </div>
-                <span className="mt-3 text-muted-foreground transition-transform group-hover:translate-x-1">→</span>
-              </div>
-            </article>
+              </article>
+            </RevealSection>
           ))}
         </div>
       </section>
