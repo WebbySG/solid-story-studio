@@ -34,6 +34,11 @@ export const Route = createRootRoute({
       { name: "description", content: "A design-driven architectural practice combining creativity and collaborative teamwork." },
       { name: "author", content: "APdS Architects" },
       { property: "og:type", content: "website" },
+      { property: "og:title", content: "APdS Architects" },
+      { name: "twitter:title", content: "APdS Architects" },
+      { property: "og:description", content: "A design-driven architectural practice combining creativity and collaborative teamwork." },
+      { name: "twitter:description", content: "A design-driven architectural practice combining creativity and collaborative teamwork." },
+      { name: "twitter:card", content: "summary" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
