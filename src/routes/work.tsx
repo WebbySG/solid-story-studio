@@ -1,10 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
-import project1 from "@/assets/project-1.jpg";
-import project2 from "@/assets/project-2.jpg";
-import project3 from "@/assets/project-3.jpg";
-import project4 from "@/assets/project-4.jpg";
-import heroHome from "@/assets/hero-home.jpg";
+import { projects } from "@/data/projects";
 
 export const Route = createFileRoute("/work")({
   head: () => ({
@@ -37,15 +33,6 @@ function RevealSection({ children, className = "" }: { children: React.ReactNode
   const ref = useReveal();
   return <div ref={ref} className={`reveal-on-scroll ${className}`}>{children}</div>;
 }
-
-const projects = [
-  { image: project1, title: "The Loft House", category: "Residential", location: "Singapore", year: "2024" },
-  { image: project2, title: "Horizon Tower", category: "Commercial", location: "Kuala Lumpur", year: "2023" },
-  { image: project3, title: "Sunset Villa", category: "Residential", location: "Bali", year: "2023" },
-  { image: project4, title: "Zen Courtyard", category: "Residential", location: "Kyoto", year: "2022" },
-  { image: heroHome, title: "Garden Residence", category: "Residential", location: "Bangkok", year: "2022" },
-  { image: project1, title: "Urban Office", category: "Commercial", location: "Mumbai", year: "2021" },
-];
 
 const categories = ["All", "Residential", "Commercial"];
 
@@ -83,8 +70,12 @@ function WorkPage() {
       <section className="mx-auto max-w-7xl px-6 pb-24 lg:px-12">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {filtered.map((project, i) => (
-            <RevealSection key={`${project.title}-${i}`}>
-              <div className="project-card group cursor-pointer">
+            <RevealSection key={`${project.slug}-${i}`}>
+              <Link
+                to="/work/$slug"
+                params={{ slug: project.slug }}
+                className="project-card group block cursor-pointer"
+              >
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <img
                     src={project.image}
@@ -95,7 +86,6 @@ function WorkPage() {
                     height={800}
                   />
                   <div className="absolute inset-0 bg-charcoal/0 transition-colors duration-500 group-hover:bg-charcoal/30" />
-                  {/* Hover overlay info */}
                   <div className="absolute bottom-0 left-0 right-0 translate-y-full p-5 transition-transform duration-500 group-hover:translate-y-0">
                     <span className="text-[10px] tracking-[0.2em] text-off-white/70">{project.location} · {project.year}</span>
                   </div>
@@ -107,7 +97,7 @@ function WorkPage() {
                   </div>
                   <span className="mt-2 text-muted-foreground/0 transition-colors group-hover:text-muted-foreground">→</span>
                 </div>
-              </div>
+              </Link>
             </RevealSection>
           ))}
         </div>
