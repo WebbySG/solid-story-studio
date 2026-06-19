@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
-import { getProject, projects } from "@/data/projects";
+import { getProject, projects, type Project } from "@/data/projects";
 
 export const Route = createFileRoute("/work/$slug")({
   head: ({ params }) => {
