@@ -70,8 +70,12 @@ function WorkPage() {
       <section className="mx-auto max-w-7xl px-6 pb-24 lg:px-12">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {filtered.map((project, i) => (
-            <RevealSection key={`${project.title}-${i}`}>
-              <div className="project-card group cursor-pointer">
+            <RevealSection key={`${project.slug}-${i}`}>
+              <Link
+                to="/work/$slug"
+                params={{ slug: project.slug }}
+                className="project-card group block cursor-pointer"
+              >
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <img
                     src={project.image}
@@ -82,7 +86,6 @@ function WorkPage() {
                     height={800}
                   />
                   <div className="absolute inset-0 bg-charcoal/0 transition-colors duration-500 group-hover:bg-charcoal/30" />
-                  {/* Hover overlay info */}
                   <div className="absolute bottom-0 left-0 right-0 translate-y-full p-5 transition-transform duration-500 group-hover:translate-y-0">
                     <span className="text-[10px] tracking-[0.2em] text-off-white/70">{project.location} · {project.year}</span>
                   </div>
@@ -94,7 +97,7 @@ function WorkPage() {
                   </div>
                   <span className="mt-2 text-muted-foreground/0 transition-colors group-hover:text-muted-foreground">→</span>
                 </div>
-              </div>
+              </Link>
             </RevealSection>
           ))}
         </div>
