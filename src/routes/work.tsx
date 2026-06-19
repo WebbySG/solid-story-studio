@@ -1,10 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
-import project1 from "@/assets/project-1.jpg";
-import project2 from "@/assets/project-2.jpg";
-import project3 from "@/assets/project-3.jpg";
-import project4 from "@/assets/project-4.jpg";
-import heroHome from "@/assets/hero-home.jpg";
+import { projects } from "@/data/projects";
 
 export const Route = createFileRoute("/work")({
   head: () => ({
@@ -37,15 +33,6 @@ function RevealSection({ children, className = "" }: { children: React.ReactNode
   const ref = useReveal();
   return <div ref={ref} className={`reveal-on-scroll ${className}`}>{children}</div>;
 }
-
-const projects = [
-  { image: project1, title: "The Loft House", category: "Residential", location: "Singapore", year: "2024" },
-  { image: project2, title: "Horizon Tower", category: "Commercial", location: "Kuala Lumpur", year: "2023" },
-  { image: project3, title: "Sunset Villa", category: "Residential", location: "Bali", year: "2023" },
-  { image: project4, title: "Zen Courtyard", category: "Residential", location: "Kyoto", year: "2022" },
-  { image: heroHome, title: "Garden Residence", category: "Residential", location: "Bangkok", year: "2022" },
-  { image: project1, title: "Urban Office", category: "Commercial", location: "Mumbai", year: "2021" },
-];
 
 const categories = ["All", "Residential", "Commercial"];
 
