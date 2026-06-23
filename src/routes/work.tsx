@@ -34,7 +34,7 @@ function RevealSection({ children, className = "" }: { children: React.ReactNode
   return <div ref={ref} className={`reveal-on-scroll ${className}`}>{children}</div>;
 }
 
-const categories = ["All", "Residential", "Commercial"];
+const categories = ["All", "Residential", "Commercial", "Institutional"];
 
 function WorkPage() {
   const [filter, setFilter] = useState("All");
