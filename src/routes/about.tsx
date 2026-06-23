@@ -36,6 +36,62 @@ function RevealSection({ children, className = "" }: { children: React.ReactNode
   return <div ref={ref} className={`reveal-on-scroll ${className}`}>{children}</div>;
 }
 
+type Leader = {
+  name: string;
+  title: string;
+  credentials: string;
+  image: string;
+  background: string[];
+  academic: string[];
+  experience: { year: string; role: string }[];
+};
+
+const leaders: Leader[] = [
+  {
+    name: "Desmond Chen",
+    title: "Executive Director",
+    credentials: "B.Arch · B.Sc Architectural Engineering · MSIA · Registered Architect, Singapore",
+    image: desmondImg,
+    background: [
+      "Ar. Desmond Chen graduated with a Bachelor of Architecture from the School of Architecture, University of Kansas, USA in 1993. In 1992, he also obtained a Bachelor of Science in Architectural Engineering, concentrating in illumination and power distribution systems. He is a registered architect in Singapore and a Corporate Member of the Singapore Institute of Architects (MSIA), and has been practicing architecture for over 30 years in Singapore.",
+      "He has extensive and relevant local and overseas experience in design, authority submissions, and execution of projects. His key experience ranges from master planning of townships to the micro-detailing of architectural features. This vast experience has helped shape outstanding designs for some of Singapore's most notable buildings.",
+    ],
+    academic: [
+      "University of Kansas, USA",
+      "Bachelor of Science in Architectural Engineering",
+      "Bachelor of Architecture",
+    ],
+    experience: [
+      { year: "1993 – 1998", role: "Architects 61 Pte Ltd, Singapore" },
+      { year: "1998 – 2000", role: "SCDA Architects Pte Ltd, Singapore" },
+      { year: "2005", role: "Founded APdS Architects, Singapore" },
+      { year: "2011", role: "Joined AVID Architects Pte Ltd as Executive Director" },
+      { year: "2015", role: "Executive Director, LT&T AVID Architects Pte Ltd" },
+      { year: "2005 – present", role: "APdS Architects, Singapore" },
+    ],
+  },
+  {
+    name: "Ng Sin Yong",
+    title: "Director",
+    credentials: "B.Arch (Hons) · MSIA · Registered Architect, Singapore",
+    image: sinyongImg,
+    background: [
+      "Ar. Ng Sin Yong graduated with a Bachelor of Architecture from the School of Architecture and Built Environment, Deakin University, Australia in 2007. He is a registered architect in Singapore and a Corporate Member of the Singapore Institute of Architects (MSIA) since 2014, with 13 years of architectural practice in Singapore.",
+      "A BCA Young Leaders Programme (YLP) participant, he specialises in multi-unit residential developments with a proven track record from project inception through sales launch and construction — designing more than 20 developments across condominiums, HDBs, and mixed-use projects totalling over 6,000 units. Selected condominium projects include Ki Residences @ Brookvale, the award-winning Cube 8 (Singapore Good Design Mark 2014), and Sky Everton.",
+      "Experienced in DfMA and PPVC methodologies, with direct involvement in multiple PPVC projects, he brings a forward-thinking approach to high-rise residential design by integrating prefabrication technologies to enhance efficiency, buildability, and design innovation.",
+    ],
+    academic: [
+      "Deakin University, Australia",
+      "Bachelor of Arts (Architecture)",
+      "Bachelor of Architecture (Hons)",
+    ],
+    experience: [
+      { year: "2008 – 2026", role: "ADDP Architects LLP, Singapore" },
+      { year: "2026 – present", role: "APdS Architects, Singapore" },
+    ],
+  },
+];
+
 const values = [
   { title: "Design Excellence", description: "Every project is an opportunity to push boundaries and create architecture that is both beautiful and functional.", icon: "◇" },
   { title: "Collaborative Approach", description: "We work closely with clients, consultants, and craftspeople to bring shared visions to life.", icon: "○" },
