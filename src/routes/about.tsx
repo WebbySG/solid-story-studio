@@ -85,7 +85,82 @@ function AboutPage() {
         </section>
       </RevealSection>
 
+      {/* Leadership */}
+      <section className="mx-auto max-w-7xl px-6 py-24 lg:px-12">
+        <RevealSection>
+          <p className="text-xs tracking-[0.3em] text-accent">LEADERSHIP</p>
+          <h2 className="mt-4 max-w-xl text-2xl font-extralight text-foreground md:text-3xl">
+            Led by <span className="text-accent">principals</span> who shape every project
+          </h2>
+        </RevealSection>
+
+        <div className="mt-16 space-y-24">
+          {leaders.map((leader, i) => (
+            <RevealSection key={leader.name}>
+              <article className="grid gap-10 md:grid-cols-12 md:gap-12">
+                <div className={`md:col-span-5 ${i % 2 === 1 ? "md:order-2" : ""}`}>
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={leader.image}
+                      alt={leader.name}
+                      className="aspect-[4/5] w-full object-cover"
+                      loading="lazy"
+                      width={1000}
+                      height={1250}
+                    />
+                    <div className={`absolute -bottom-3 -z-10 h-full w-full border border-accent/20 ${i % 2 === 1 ? "-left-3" : "-right-3"}`} />
+                  </div>
+                </div>
+
+                <div className="md:col-span-7">
+                  <p className="text-[10px] tracking-[0.3em] text-accent">{leader.title.toUpperCase()}</p>
+                  <h3 className="mt-2 text-3xl font-extralight text-foreground md:text-4xl">{leader.name}</h3>
+                  <p className="mt-2 text-xs tracking-[0.15em] text-muted-foreground">{leader.credentials}</p>
+
+                  <div className="mt-6 flex items-center gap-3">
+                    <div className="h-px w-12 bg-accent" />
+                    <div className="h-1.5 w-1.5 rotate-45 border border-accent" />
+                  </div>
+
+                  <div className="mt-8">
+                    <p className="text-[10px] tracking-[0.3em] text-accent">BACKGROUND</p>
+                    <div className="mt-4 space-y-4 text-sm leading-relaxed text-muted-foreground">
+                      {leader.background.map((p, idx) => (
+                        <p key={idx}>{p}</p>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-10 grid gap-10 sm:grid-cols-2">
+                    <div>
+                      <p className="text-[10px] tracking-[0.3em] text-accent">ACADEMIC</p>
+                      <ul className="mt-4 space-y-2 text-sm font-light text-foreground">
+                        {leader.academic.map((line) => (
+                          <li key={line}>{line}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <p className="text-[10px] tracking-[0.3em] text-accent">EXPERIENCE</p>
+                      <ul className="mt-4 space-y-3">
+                        {leader.experience.map((e) => (
+                          <li key={e.year} className="grid grid-cols-[5rem_1fr] gap-3 text-sm">
+                            <span className="font-light text-accent">{e.year}</span>
+                            <span className="font-light text-foreground">{e.role}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </RevealSection>
+          ))}
+        </div>
+      </section>
+
       {/* Values */}
+
       <section className="mx-auto max-w-7xl px-6 py-24 lg:px-12">
         <RevealSection>
           <p className="text-xs tracking-[0.3em] text-accent">OUR VALUES</p>
