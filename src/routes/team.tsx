@@ -48,10 +48,11 @@ const principals: Member[] = [
 ];
 
 const team: Member[] = [
-  { name: "Wei Jian", role: "Senior Architect", image: team1 },
-  { name: "Mei Lin", role: "Project Architect", image: team2 },
-  { name: "Hao Ren", role: "Design Architect", image: team3 },
-  { name: "Hui Fang", role: "Interior Designer", image: team4 },
+  { name: "Jason Tan", role: "Associate Director", image: jasonAsset.url },
+  { name: "Jenn Lim", role: "Senior Architect", image: jennAsset.url },
+  { name: "Clarence Goh", role: "Project Architect", image: clarenceAsset.url },
+  { name: "Mimi Nguyen", role: "Design Architect", image: mimiAsset.url },
+  { name: "Priya Sharma", role: "Architectural Designer", image: priyaAsset.url },
 ];
 
 function TeamPage() {
