@@ -2,10 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import desmondImg from "@/assets/team-desmond.jpg";
 import sinyongImg from "@/assets/team-sinyong.jpg";
-import team1 from "@/assets/team-1.jpg";
-import team2 from "@/assets/team-2.jpg";
-import team3 from "@/assets/team-3.jpg";
-import team4 from "@/assets/team-4.jpg";
+import jasonAsset from "@/assets/team-jason.jpg.asset.json";
+import jennAsset from "@/assets/team-jenn.jpg.asset.json";
+import clarenceAsset from "@/assets/team-clarence.jpg.asset.json";
+import mimiAsset from "@/assets/team-mimi.jpg.asset.json";
+import priyaAsset from "@/assets/team-priya.jpg.asset.json";
 
 export const Route = createFileRoute("/team")({
   head: () => ({
@@ -47,10 +48,11 @@ const principals: Member[] = [
 ];
 
 const team: Member[] = [
-  { name: "Wei Jian", role: "Senior Architect", image: team1 },
-  { name: "Mei Lin", role: "Project Architect", image: team2 },
-  { name: "Hao Ren", role: "Design Architect", image: team3 },
-  { name: "Hui Fang", role: "Interior Designer", image: team4 },
+  { name: "Jason Tan", role: "Associate Director", image: jasonAsset.url },
+  { name: "Jenn Lim", role: "Senior Architect", image: jennAsset.url },
+  { name: "Clarence Goh", role: "Project Architect", image: clarenceAsset.url },
+  { name: "Mimi Nguyen", role: "Design Architect", image: mimiAsset.url },
+  { name: "Priya Sharma", role: "Architectural Designer", image: priyaAsset.url },
 ];
 
 function TeamPage() {
@@ -109,7 +111,7 @@ function TeamPage() {
           </div>
 
           {/* Studio row */}
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8">
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-5 md:gap-8">
             {team.map((m) => (
               <Reveal key={m.name}>
                 <div className="group">
