@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
 import desmondImg from "@/assets/team-desmond.jpg";
 import sinyongImg from "@/assets/team-sinyong.jpg";
 import jasonAsset from "@/assets/team-jason.jpg.asset.json";
@@ -12,126 +11,74 @@ export const Route = createFileRoute("/team")({
   head: () => ({
     meta: [
       { title: "Team — APdS Architects" },
-      { name: "description", content: "Meet the architects and designers behind APdS — a collaborative studio led by Desmond Chen and Ng Sin Yong." },
+      { name: "description", content: "Meet the architects and designers behind APdS." },
       { property: "og:title", content: "Team — APdS Architects" },
-      { property: "og:description", content: "Meet the architects and designers behind APdS — a collaborative studio led by Desmond Chen and Ng Sin Yong." },
+      { property: "og:description", content: "Meet the architects and designers behind APdS." },
     ],
   }),
   component: TeamPage,
 });
 
-function useReveal() {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { el.classList.add("revealed"); observer.unobserve(el); } },
-      { threshold: 0.15 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-  return ref;
-}
-
-function Reveal({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  const ref = useReveal();
-  return <div ref={ref} className={`reveal-on-scroll ${className}`}>{children}</div>;
-}
-
-type Member = { name: string; role: string; image: string };
+type Member = { name: string; image: string };
 
 const principals: Member[] = [
-  { name: "Desmond Chen", role: "Executive Director", image: desmondImg },
-  { name: "Ng Sin Yong", role: "Director", image: sinyongImg },
+  { name: "Desmond Chen", image: desmondImg },
+  { name: "Ng Sin Yong", image: sinyongImg },
 ];
 
 const team: Member[] = [
-  { name: "Jenn Lim", role: "Senior Architect", image: jennAsset.url },
-  { name: "Jason Tan", role: "Associate Director", image: jasonAsset.url },
-  { name: "Clarence Goh", role: "Project Architect", image: clarenceAsset.url },
-  { name: "Mimi Nguyen", role: "Design Architect", image: mimiAsset.url },
-  { name: "Priya Sharma", role: "Architectural Designer", image: priyaAsset.url },
+  { name: "Jenn Lim", image: jennAsset.url },
+  { name: "Jason Tan", image: jasonAsset.url },
+  { name: "Clarence Goh", image: clarenceAsset.url },
+  { name: "Mimi Nguyen", image: mimiAsset.url },
+  { name: "Priya Sharma", image: priyaAsset.url },
 ];
+
+function Tile({ m, ratio = "aspect-[16/10]" }: { m: Member; ratio?: string }) {
+  return (
+    <figure className="group relative h-full w-full overflow-hidden">
+      <img
+        src={m.image}
+        alt={m.name}
+        loading="lazy"
+        className={`h-full w-full ${ratio} object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.03]`}
+      />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/0 to-transparent opacity-90" />
+      <figcaption className="absolute bottom-0 left-0 right-0 flex items-end justify-between p-4 md:p-5">
+        <h3 className="text-sm font-light tracking-wide text-background md:text-base">{m.name}</h3>
+        <span className="h-px w-8 bg-accent" />
+      </figcaption>
+    </figure>
+  );
+}
 
 function TeamPage() {
   return (
-    <div className="pt-20">
+    <div className="flex min-h-screen flex-col pt-20">
       {/* Header */}
-      <Reveal>
-        <section className="mx-auto max-w-7xl px-6 py-16 lg:px-12 lg:py-24">
-          <p className="text-xs tracking-[0.3em] text-accent">OUR TEAM</p>
-          <h1 className="mt-4 max-w-2xl text-3xl font-extralight leading-snug text-foreground md:text-5xl">
-            The people behind<br />
-            <span className="text-accent">the practice</span>
-          </h1>
-          <div className="mt-8 flex items-center gap-3">
-            <div className="h-px w-16 bg-accent" />
-            <div className="h-1.5 w-1.5 rotate-45 border border-accent" />
-          </div>
-          <p className="mt-8 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            APdS is a collaborative studio of architects, interior designers, and makers. Our work is shaped by a shared commitment to craft, context, and quiet, considered design.
-          </p>
-        </section>
-      </Reveal>
+      <header className="mx-auto flex w-full max-w-[1800px] items-end justify-between px-6 pb-4 pt-2 lg:px-12">
+        <h1 className="text-2xl font-extralight tracking-tight text-foreground md:text-3xl">
+          Our <span className="text-accent">Team</span>
+        </h1>
+        <div className="flex items-center gap-3">
+          <span className="h-px w-16 bg-accent" />
+          <span className="h-1.5 w-1.5 rotate-45 border border-accent" />
+        </div>
+      </header>
 
-      {/* Unified team container: principals (large) + studio (smaller) */}
-      <section className="mx-auto max-w-7xl px-6 pb-24 lg:px-12 lg:pb-32">
-        <div className="border border-border bg-card/30 p-6 md:p-10 lg:p-14">
-          {/* Principals row */}
-          <div className="grid gap-8 md:grid-cols-2 md:gap-12">
-            {principals.map((p) => (
-              <Reveal key={p.name}>
-                <div className="group">
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={p.image}
-                      alt={p.name}
-                      className="aspect-[4/5] w-full object-cover grayscale transition-transform duration-700 group-hover:scale-[1.03]"
-                      loading="lazy"
-                      width={1200}
-                      height={1500}
-                    />
-                  </div>
-                  <div className="mt-5">
-                    <p className="text-[10px] tracking-[0.3em] text-accent">{p.role.toUpperCase()}</p>
-                    <h2 className="mt-2 text-2xl font-extralight text-foreground md:text-3xl">{p.name}</h2>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* Divider inside container */}
-          <div className="my-12 flex items-center gap-4 md:my-16">
-            <div className="h-px flex-1 bg-border" />
-            <p className="text-[10px] tracking-[0.3em] text-muted-foreground">THE STUDIO</p>
-            <div className="h-px flex-1 bg-border" />
-          </div>
-
-          {/* Studio row */}
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-5 md:gap-8">
-            {team.map((m) => (
-              <Reveal key={m.name}>
-                <div className="group">
-                  <div className="overflow-hidden">
-                    <img
-                      src={m.image}
-                      alt={m.name}
-                      className="aspect-[4/5] w-full object-cover grayscale transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy"
-                      width={700}
-                      height={900}
-                    />
-                  </div>
-                  <div className="mt-4">
-                    <h3 className="text-base font-light text-foreground">{m.name}</h3>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+      {/* Grid — all 7 visible above the fold */}
+      <section className="mx-auto flex w-full max-w-[1800px] flex-1 flex-col gap-3 px-6 pb-6 lg:px-12 lg:pb-10">
+        {/* Principals: 2 wide */}
+        <div className="grid flex-1 grid-cols-1 gap-3 md:grid-cols-2" style={{ minHeight: 0 }}>
+          {principals.map((p) => (
+            <Tile key={p.name} m={p} />
+          ))}
+        </div>
+        {/* Studio: 5 wide */}
+        <div className="grid flex-1 grid-cols-2 gap-3 md:grid-cols-5" style={{ minHeight: 0 }}>
+          {team.map((m) => (
+            <Tile key={m.name} m={m} />
+          ))}
         </div>
       </section>
     </div>
