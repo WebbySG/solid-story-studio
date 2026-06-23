@@ -111,7 +111,7 @@ function TeamPage() {
           </div>
 
           {/* Studio row */}
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8">
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-5 md:gap-8">
             {team.map((m) => (
               <Reveal key={m.name}>
                 <div className="group">
