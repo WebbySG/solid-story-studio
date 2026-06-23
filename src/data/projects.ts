@@ -150,6 +150,48 @@ export const projects: Project[] = [
       { label: "Photography", value: "Studio APdS" },
     ],
   },
+  {
+    slug: "civic-library",
+    image: project5,
+    title: "Civic Library",
+    category: "Institutional",
+    location: "Taipei",
+    year: "2024",
+    client: "Municipal Authority",
+    area: "65,000 sq ft",
+    status: "Completed",
+    description: [
+      "The Civic Library reframes the public library as an open civic room. A generous portico draws the street inward, while a layered glass façade modulates daylight across stacked reading galleries.",
+      "Inside, warm timber finishes and full-height bookshelves create an atmosphere of quiet focus, balanced by an atrium that invites informal community gatherings.",
+    ],
+    gallery: [project5, heroHome, project2, project3],
+    facts: [
+      { label: "Typology", value: "Public Library" },
+      { label: "Scope", value: "Architecture, Interior" },
+      { label: "Photography", value: "Studio APdS" },
+    ],
+  },
+  {
+    slug: "arts-pavilion",
+    image: aboutTeam,
+    title: "Arts Pavilion",
+    category: "Institutional",
+    location: "Singapore",
+    year: "2023",
+    client: "National Arts Council",
+    area: "28,000 sq ft",
+    status: "Completed",
+    description: [
+      "A discreet cultural pavilion set within a heritage park, the Arts Pavilion negotiates between landscape, art, and visitor. Cast concrete walls frame a sequence of naturally lit galleries connected by a shaded outdoor cloister.",
+      "The brief called for flexibility — movable partitions and concealed services allow each exhibition to reshape the volume without compromising the architectural calm.",
+    ],
+    gallery: [aboutTeam, project4, project5, heroHome],
+    facts: [
+      { label: "Typology", value: "Cultural Pavilion" },
+      { label: "Scope", value: "Architecture, Interior, Landscape" },
+      { label: "Photography", value: "Studio APdS" },
+    ],
+  },
 ];
 
 export function getProject(slug: string) {
