@@ -2,10 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import desmondImg from "@/assets/team-desmond.jpg";
 import sinyongImg from "@/assets/team-sinyong.jpg";
-import team1 from "@/assets/team-1.jpg";
-import team2 from "@/assets/team-2.jpg";
-import team3 from "@/assets/team-3.jpg";
-import team4 from "@/assets/team-4.jpg";
+import jasonAsset from "@/assets/team-jason.jpg.asset.json";
+import jennAsset from "@/assets/team-jenn.jpg.asset.json";
+import clarenceAsset from "@/assets/team-clarence.jpg.asset.json";
+import mimiAsset from "@/assets/team-mimi.jpg.asset.json";
+import priyaAsset from "@/assets/team-priya.jpg.asset.json";
 
 export const Route = createFileRoute("/team")({
   head: () => ({
