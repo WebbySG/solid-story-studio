@@ -18,6 +18,7 @@ export function Footer() {
                 { to: "/" as const, label: "Home" },
                 { to: "/about" as const, label: "About" },
                 { to: "/work" as const, label: "Work" },
+                { to: "/team" as const, label: "Team" },
                 { to: "/media" as const, label: "Media" },
                 { to: "/contact" as const, label: "Contact" },
               ].map((link) => (
