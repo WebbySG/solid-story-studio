@@ -2,14 +2,17 @@ import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 import project4 from "@/assets/project-4.jpg";
+import project5 from "@/assets/project-5.jpg";
 import heroHome from "@/assets/hero-home.jpg";
 import aboutTeam from "@/assets/about-team.jpg";
+
+export type ProjectCategory = "Residential" | "Commercial" | "Institutional";
 
 export type Project = {
   slug: string;
   image: string;
   title: string;
-  category: "Residential" | "Commercial";
+  category: ProjectCategory;
   location: string;
   year: string;
   client: string;
