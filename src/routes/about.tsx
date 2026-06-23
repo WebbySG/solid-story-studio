@@ -101,6 +101,82 @@ function AboutPage() {
         </div>
       </section>
 
+      {/* Design Philosophy */}
+      <RevealSection>
+        <section className="mx-auto max-w-7xl px-6 py-20 lg:px-12 lg:py-28">
+          <div className="grid gap-12 md:grid-cols-12">
+            <div className="md:col-span-4">
+              <p className="text-xs tracking-[0.3em] text-accent">01 — PHILOSOPHY</p>
+              <h2 className="mt-4 text-2xl font-extralight text-foreground md:text-3xl">
+                Design <span className="text-accent">Philosophy</span>
+              </h2>
+              <div className="mt-6 flex items-center gap-3">
+                <div className="h-px w-12 bg-accent" />
+                <div className="h-1.5 w-1.5 rotate-45 border border-accent" />
+              </div>
+            </div>
+            <div className="space-y-5 text-sm leading-relaxed text-muted-foreground md:col-span-8 md:text-base">
+              <p>
+                APdS is a design-oriented practice. The firm emphasises design creativity and innovation. Our design philosophy focuses on creating strong and clear architectural forms and spaces that are appropriate and contemporary — using available technology and everyday operational problems to arrive at elegant solutions.
+              </p>
+              <p>
+                The firm adopts a team approach towards project work, providing continuity in design and enhancing the co-ordination and collaboration of all parties involved. Each member is an integral part of the team, and client involvement is actively encouraged for the effective development of each project.
+              </p>
+              <p>
+                Ultimately, through personalised attention from key personnel, the use of the latest technologies, and the teamwork of a diverse group of talented individuals, APdS Architects is ready to take on the challenges of designing for the most discerning clients.
+              </p>
+            </div>
+          </div>
+        </section>
+      </RevealSection>
+
+      {/* Scope of Work */}
+      <RevealSection>
+        <section className="border-t border-border bg-secondary/30">
+          <div className="mx-auto max-w-7xl px-6 py-20 lg:px-12 lg:py-28">
+            <div className="grid gap-12 md:grid-cols-12">
+              <div className="md:col-span-4">
+                <p className="text-xs tracking-[0.3em] text-accent">02 — SCOPE OF WORK</p>
+                <h2 className="mt-4 text-2xl font-extralight text-foreground md:text-3xl">
+                  What we <span className="text-accent">offer</span>
+                </h2>
+                <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
+                  Full architectural services — from initial concept through to authorities' submission and on-site supervision.
+                </p>
+              </div>
+              <div className="md:col-span-8">
+                <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
+                  Our services include master planning, high-rise commercial, multi-residential, hospitality, institutional, mixed-use, interior, private residential, and landscape design. Full architectural services are offered — including master planning, concept and detail design, documentation, approval, supervision and authorities submission — in addition to full interior, landscape, and project management.
+                </p>
+                <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-3">
+                  {[
+                    "Master Planning",
+                    "High-Rise Commercial",
+                    "Multi-Residential",
+                    "Hospitality",
+                    "Institutional",
+                    "Mixed-Use",
+                    "Interior Design",
+                    "Private Residential",
+                    "Landscape Design",
+                    "Concept & Detail Design",
+                    "Authorities Submission",
+                    "Project Management",
+                  ].map((item) => (
+                    <div key={item} className="flex items-center gap-3 border-t border-border/60 py-3">
+                      <span className="text-accent">—</span>
+                      <span className="text-xs tracking-[0.05em] text-foreground">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </RevealSection>
+
+
+
       {/* Stats */}
       <RevealSection>
         <section className="relative bg-primary py-20 overflow-hidden">
