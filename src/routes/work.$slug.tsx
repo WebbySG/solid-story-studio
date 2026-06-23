@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getProject, projects, type Project } from "@/data/projects";
 
 export const Route = createFileRoute("/work/$slug")({
@@ -70,41 +70,96 @@ function Reveal({ children, className = "" }: { children: React.ReactNode; class
   return <div ref={ref} className={`reveal-on-scroll ${className}`}>{children}</div>;
 }
 
+function Carousel({ images, title }: { images: string[]; title: string }) {
+  const [index, setIndex] = useState(0);
+  const total = images.length;
+  const go = (n: number) => setIndex((n + total) % total);
+
+  return (
+    <div className="relative w-full">
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-secondary md:aspect-[21/9]">
+        {images.map((src, i) => (
+          <img
+            key={i}
+            src={src}
+            alt={`${title} — view ${i + 1}`}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${i === index ? "opacity-100" : "opacity-0"}`}
+            loading={i === 0 ? "eager" : "lazy"}
+            width={2400}
+            height={1350}
+          />
+        ))}
+
+        {/* Controls */}
+        <button
+          aria-label="Previous image"
+          onClick={() => go(index - 1)}
+          className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/70 px-4 py-3 text-xs tracking-[0.2em] text-foreground backdrop-blur-sm transition hover:bg-background md:left-8"
+        >
+          ←
+        </button>
+        <button
+          aria-label="Next image"
+          onClick={() => go(index + 1)}
+          className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/70 px-4 py-3 text-xs tracking-[0.2em] text-foreground backdrop-blur-sm transition hover:bg-background md:right-8"
+        >
+          →
+        </button>
+
+        {/* Counter */}
+        <div className="absolute bottom-4 right-4 bg-background/70 px-3 py-1.5 text-[10px] tracking-[0.2em] text-foreground backdrop-blur-sm md:bottom-6 md:right-6">
+          {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+        </div>
+      </div>
+
+      {/* Dots */}
+      <div className="mt-5 flex items-center justify-center gap-2">
+        {images.map((_, i) => (
+          <button
+            key={i}
+            aria-label={`Go to image ${i + 1}`}
+            onClick={() => setIndex(i)}
+            className={`h-px transition-all ${i === index ? "w-10 bg-accent" : "w-6 bg-border hover:bg-foreground/40"}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function ProjectPage() {
   const { project } = Route.useLoaderData() as { project: Project };
   const idx = projects.findIndex((p) => p.slug === project.slug);
   const prev = projects[(idx - 1 + projects.length) % projects.length];
   const next = projects[(idx + 1) % projects.length];
+  const carouselImages = [project.image, ...project.gallery.filter((g) => g !== project.image)];
 
   return (
-    <div>
-      {/* Hero */}
-      <section className="relative h-[85vh] w-full overflow-hidden">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="absolute inset-0 h-full w-full object-cover"
-          width={2400}
-          height={1600}
-        />
-        <div className="hero-overlay absolute inset-0" />
-        <div className="absolute inset-x-0 bottom-0 mx-auto max-w-7xl px-6 pb-16 lg:px-12 lg:pb-24">
-          <Reveal>
-            <p className="text-xs tracking-[0.3em] text-off-white/80">
-              {project.category.toUpperCase()} · {project.location.toUpperCase()} · {project.year}
-            </p>
-            <h1 className="mt-4 text-4xl font-extralight text-off-white md:text-6xl lg:text-7xl">
-              {project.title}
-            </h1>
-            <div className="mt-6 flex items-center gap-3">
-              <div className="h-px w-16 bg-accent" />
-              <div className="h-1.5 w-1.5 rotate-45 border border-accent" />
-            </div>
-          </Reveal>
-        </div>
+    <div className="pt-20">
+      {/* Title */}
+      <section className="mx-auto max-w-7xl px-6 pt-8 pb-8 lg:px-12 lg:pt-12">
+        <Reveal>
+          <p className="text-xs tracking-[0.3em] text-accent">
+            {project.category.toUpperCase()} · {project.location.toUpperCase()} · {project.year}
+          </p>
+          <h1 className="mt-4 text-3xl font-extralight text-foreground md:text-5xl lg:text-6xl">
+            {project.title}
+          </h1>
+          <div className="mt-6 flex items-center gap-3">
+            <div className="h-px w-16 bg-accent" />
+            <div className="h-1.5 w-1.5 rotate-45 border border-accent" />
+          </div>
+        </Reveal>
       </section>
 
-      {/* Overview */}
+      {/* Carousel — FIRST */}
+      <section className="mx-auto max-w-7xl px-6 lg:px-12">
+        <Reveal>
+          <Carousel images={carouselImages} title={project.title} />
+        </Reveal>
+      </section>
+
+      {/* Description — AFTER carousel */}
       <section className="mx-auto max-w-7xl px-6 py-20 lg:px-12 lg:py-28">
         <div className="grid gap-12 md:grid-cols-12">
           <Reveal className="md:col-span-4">
@@ -134,7 +189,8 @@ function ProjectPage() {
           </Reveal>
 
           <Reveal className="md:col-span-8">
-            <div className="space-y-6 text-base font-light leading-relaxed text-foreground/90 md:text-lg">
+            <p className="text-xs tracking-[0.3em] text-accent">DESCRIPTION</p>
+            <div className="mt-8 space-y-6 text-base font-light leading-relaxed text-foreground/90 md:text-lg">
               {project.description.map((p, i) => (
                 <p key={i}>{p}</p>
               ))}
@@ -149,33 +205,6 @@ function ProjectPage() {
               ))}
             </div>
           </Reveal>
-        </div>
-      </section>
-
-      {/* Gallery */}
-      <section className="mx-auto max-w-7xl px-6 pb-24 lg:px-12">
-        <div className="grid gap-6 md:grid-cols-12">
-          {project.gallery.map((src, i) => {
-            // Asymmetric: full / half / half / full pattern
-            const span =
-              i % 4 === 0 ? "md:col-span-12 aspect-[21/9]"
-              : i % 4 === 3 ? "md:col-span-12 aspect-[21/9]"
-              : "md:col-span-6 aspect-[4/3]";
-            return (
-              <Reveal key={i} className={span}>
-                <div className="h-full w-full overflow-hidden">
-                  <img
-                    src={src}
-                    alt={`${project.title} — view ${i + 1}`}
-                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-                    loading="lazy"
-                    width={2400}
-                    height={1600}
-                  />
-                </div>
-              </Reveal>
-            );
-          })}
         </div>
       </section>
 
