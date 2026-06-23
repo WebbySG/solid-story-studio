@@ -127,7 +127,6 @@ function TeamPage() {
                   </div>
                   <div className="mt-4">
                     <h3 className="text-base font-light text-foreground">{m.name}</h3>
-                    <p className="mt-1 text-[10px] tracking-[0.2em] text-muted-foreground">{m.role.toUpperCase()}</p>
                   </div>
                 </div>
               </Reveal>
