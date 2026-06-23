@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
 import aboutTeam from "@/assets/about-team.jpg";
+import desmondImg from "@/assets/team-desmond.jpg";
+import sinyongImg from "@/assets/team-sinyong.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -33,6 +35,62 @@ function RevealSection({ children, className = "" }: { children: React.ReactNode
   const ref = useReveal();
   return <div ref={ref} className={`reveal-on-scroll ${className}`}>{children}</div>;
 }
+
+type Leader = {
+  name: string;
+  title: string;
+  credentials: string;
+  image: string;
+  background: string[];
+  academic: string[];
+  experience: { year: string; role: string }[];
+};
+
+const leaders: Leader[] = [
+  {
+    name: "Desmond Chen",
+    title: "Executive Director",
+    credentials: "B.Arch · B.Sc Architectural Engineering · MSIA · Registered Architect, Singapore",
+    image: desmondImg,
+    background: [
+      "Ar. Desmond Chen graduated with a Bachelor of Architecture from the School of Architecture, University of Kansas, USA in 1993. In 1992, he also obtained a Bachelor of Science in Architectural Engineering, concentrating in illumination and power distribution systems. He is a registered architect in Singapore and a Corporate Member of the Singapore Institute of Architects (MSIA), and has been practicing architecture for over 30 years in Singapore.",
+      "He has extensive and relevant local and overseas experience in design, authority submissions, and execution of projects. His key experience ranges from master planning of townships to the micro-detailing of architectural features. This vast experience has helped shape outstanding designs for some of Singapore's most notable buildings.",
+    ],
+    academic: [
+      "University of Kansas, USA",
+      "Bachelor of Science in Architectural Engineering",
+      "Bachelor of Architecture",
+    ],
+    experience: [
+      { year: "1993 – 1998", role: "Architects 61 Pte Ltd, Singapore" },
+      { year: "1998 – 2000", role: "SCDA Architects Pte Ltd, Singapore" },
+      { year: "2005", role: "Founded APdS Architects, Singapore" },
+      { year: "2011", role: "Joined AVID Architects Pte Ltd as Executive Director" },
+      { year: "2015", role: "Executive Director, LT&T AVID Architects Pte Ltd" },
+      { year: "2005 – present", role: "APdS Architects, Singapore" },
+    ],
+  },
+  {
+    name: "Ng Sin Yong",
+    title: "Director",
+    credentials: "B.Arch (Hons) · MSIA · Registered Architect, Singapore",
+    image: sinyongImg,
+    background: [
+      "Ar. Ng Sin Yong graduated with a Bachelor of Architecture from the School of Architecture and Built Environment, Deakin University, Australia in 2007. He is a registered architect in Singapore and a Corporate Member of the Singapore Institute of Architects (MSIA) since 2014, with 13 years of architectural practice in Singapore.",
+      "A BCA Young Leaders Programme (YLP) participant, he specialises in multi-unit residential developments with a proven track record from project inception through sales launch and construction — designing more than 20 developments across condominiums, HDBs, and mixed-use projects totalling over 6,000 units. Selected condominium projects include Ki Residences @ Brookvale, the award-winning Cube 8 (Singapore Good Design Mark 2014), and Sky Everton.",
+      "Experienced in DfMA and PPVC methodologies, with direct involvement in multiple PPVC projects, he brings a forward-thinking approach to high-rise residential design by integrating prefabrication technologies to enhance efficiency, buildability, and design innovation.",
+    ],
+    academic: [
+      "Deakin University, Australia",
+      "Bachelor of Arts (Architecture)",
+      "Bachelor of Architecture (Hons)",
+    ],
+    experience: [
+      { year: "2008 – 2026", role: "ADDP Architects LLP, Singapore" },
+      { year: "2026 – present", role: "APdS Architects, Singapore" },
+    ],
+  },
+];
 
 const values = [
   { title: "Design Excellence", description: "Every project is an opportunity to push boundaries and create architecture that is both beautiful and functional.", icon: "◇" },
@@ -83,7 +141,82 @@ function AboutPage() {
         </section>
       </RevealSection>
 
+      {/* Leadership */}
+      <section className="mx-auto max-w-7xl px-6 py-24 lg:px-12">
+        <RevealSection>
+          <p className="text-xs tracking-[0.3em] text-accent">LEADERSHIP</p>
+          <h2 className="mt-4 max-w-xl text-2xl font-extralight text-foreground md:text-3xl">
+            Led by <span className="text-accent">principals</span> who shape every project
+          </h2>
+        </RevealSection>
+
+        <div className="mt-16 space-y-24">
+          {leaders.map((leader, i) => (
+            <RevealSection key={leader.name}>
+              <article className="grid gap-10 md:grid-cols-12 md:gap-12">
+                <div className={`md:col-span-5 ${i % 2 === 1 ? "md:order-2" : ""}`}>
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={leader.image}
+                      alt={leader.name}
+                      className="aspect-[4/5] w-full object-cover"
+                      loading="lazy"
+                      width={1000}
+                      height={1250}
+                    />
+                    <div className={`absolute -bottom-3 -z-10 h-full w-full border border-accent/20 ${i % 2 === 1 ? "-left-3" : "-right-3"}`} />
+                  </div>
+                </div>
+
+                <div className="md:col-span-7">
+                  <p className="text-[10px] tracking-[0.3em] text-accent">{leader.title.toUpperCase()}</p>
+                  <h3 className="mt-2 text-3xl font-extralight text-foreground md:text-4xl">{leader.name}</h3>
+                  <p className="mt-2 text-xs tracking-[0.15em] text-muted-foreground">{leader.credentials}</p>
+
+                  <div className="mt-6 flex items-center gap-3">
+                    <div className="h-px w-12 bg-accent" />
+                    <div className="h-1.5 w-1.5 rotate-45 border border-accent" />
+                  </div>
+
+                  <div className="mt-8">
+                    <p className="text-[10px] tracking-[0.3em] text-accent">BACKGROUND</p>
+                    <div className="mt-4 space-y-4 text-sm leading-relaxed text-muted-foreground">
+                      {leader.background.map((p, idx) => (
+                        <p key={idx}>{p}</p>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-10 grid gap-10 sm:grid-cols-2">
+                    <div>
+                      <p className="text-[10px] tracking-[0.3em] text-accent">ACADEMIC</p>
+                      <ul className="mt-4 space-y-2 text-sm font-light text-foreground">
+                        {leader.academic.map((line) => (
+                          <li key={line}>{line}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <p className="text-[10px] tracking-[0.3em] text-accent">EXPERIENCE</p>
+                      <ul className="mt-4 space-y-3">
+                        {leader.experience.map((e) => (
+                          <li key={e.year} className="grid grid-cols-[5rem_1fr] gap-3 text-sm">
+                            <span className="font-light text-accent">{e.year}</span>
+                            <span className="font-light text-foreground">{e.role}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </RevealSection>
+          ))}
+        </div>
+      </section>
+
       {/* Values */}
+
       <section className="mx-auto max-w-7xl px-6 py-24 lg:px-12">
         <RevealSection>
           <p className="text-xs tracking-[0.3em] text-accent">OUR VALUES</p>
