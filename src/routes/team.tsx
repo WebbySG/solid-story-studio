@@ -48,8 +48,8 @@ const principals: Member[] = [
 ];
 
 const team: Member[] = [
-  { name: "Jason Tan", role: "Associate Director", image: jasonAsset.url },
   { name: "Jenn Lim", role: "Senior Architect", image: jennAsset.url },
+  { name: "Jason Tan", role: "Associate Director", image: jasonAsset.url },
   { name: "Clarence Goh", role: "Project Architect", image: clarenceAsset.url },
   { name: "Mimi Nguyen", role: "Design Architect", image: mimiAsset.url },
   { name: "Priya Sharma", role: "Architectural Designer", image: priyaAsset.url },
@@ -127,7 +127,6 @@ function TeamPage() {
                   </div>
                   <div className="mt-4">
                     <h3 className="text-base font-light text-foreground">{m.name}</h3>
-                    <p className="mt-1 text-[10px] tracking-[0.2em] text-muted-foreground">{m.role.toUpperCase()}</p>
                   </div>
                 </div>
               </Reveal>
