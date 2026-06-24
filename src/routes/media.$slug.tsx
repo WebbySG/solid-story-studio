@@ -106,7 +106,7 @@ function MediaPostPage() {
           </Reveal>
           <Reveal className="md:col-span-9">
             <div className="space-y-6 text-base font-light leading-relaxed text-foreground/90 md:text-lg">
-              {post.content.map((paragraph) => (
+              {post.content.map((paragraph: string) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
@@ -116,7 +116,7 @@ function MediaPostPage() {
 
       <section className="mx-auto max-w-7xl px-6 pb-20 lg:px-12 lg:pb-28">
         <div className="grid gap-6 md:grid-cols-2">
-          {post.gallery.slice(1, 5).map((image, index) => (
+          {post.gallery.slice(1, 5).map((image: string, index: number) => (
             <Reveal key={image}>
               <div className="relative aspect-[4/5] overflow-hidden bg-secondary">
                 <img src={image} alt={`${post.title} detail ${index + 1}`} className="h-full w-full object-cover" loading="lazy" width={1200} height={1500} />
