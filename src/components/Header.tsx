@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import apdsLogo from "@/assets/apds-logo.jpg";
+import apdsLogo from "@/assets/apds-logo.png.asset.json";
 
 const navLinks = [
   { to: "/" as const, label: "HOME" },
@@ -18,11 +18,10 @@ export function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-12">
         <Link to="/" className="flex items-center gap-3">
-          <img src={apdsLogo} alt="APdS Architects" className="h-10 w-10 rounded-full" width={40} height={40} />
+          <img src={apdsLogo.url} alt="APdS Architects" className="h-10 w-10 rounded-full object-cover" width={40} height={40} />
           <span className="text-sm font-light tracking-[0.25em] text-foreground">APdS ARCHITECTS</span>
         </Link>
 
-        {/* Desktop nav */}
         <nav className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <Link
@@ -37,12 +36,7 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
+        <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
           <div className="flex flex-col gap-1.5">
             <span className={`block h-px w-6 bg-foreground transition-all ${mobileOpen ? "translate-y-[3.5px] rotate-45" : ""}`} />
             <span className={`block h-px w-6 bg-foreground transition-all ${mobileOpen ? "opacity-0" : ""}`} />
@@ -51,7 +45,6 @@ export function Header() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
         <nav className="border-t border-border bg-background px-6 py-6 md:hidden">
           <div className="flex flex-col gap-4">

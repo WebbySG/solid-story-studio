@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — APdS Architects" },
-      { name: "description", content: "Get in touch with APdS Architects for your next project." },
+      { name: "description", content: "Contact APdS Architects in Singapore for architectural and interior design enquiries." },
       { property: "og:title", content: "Contact — APdS Architects" },
-      { property: "og:description", content: "Get in touch with APdS Architects for your next project." },
+      { property: "og:description", content: "Contact APdS Architects in Singapore for architectural and interior design enquiries." },
     ],
   }),
   component: ContactPage,
@@ -18,10 +18,12 @@ function useReveal() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { el.classList.add("revealed"); observer.unobserve(el); } },
-      { threshold: 0.15 }
-    );
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        el.classList.add("revealed");
+        observer.unobserve(el);
+      }
+    }, { threshold: 0.15 });
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
@@ -33,19 +35,20 @@ function RevealSection({ children, className = "" }: { children: React.ReactNode
   return <div ref={ref} className={`reveal-on-scroll ${className}`}>{children}</div>;
 }
 
+const socialLinks = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/apds-architects/" },
+  { label: "Facebook", href: "https://www.facebook.com/p/APdS-Architects-61574526505829/" },
+  { label: "Instagram", href: "https://www.instagram.com/apdsarchitects/" },
+  { label: "WhatsApp", href: "https://wa.me/6590721618" },
+];
+
 function ContactPage() {
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-  };
-
   return (
     <div className="pt-20">
       <RevealSection>
         <section className="mx-auto max-w-7xl px-6 py-16 lg:px-12 lg:py-24">
-          <p className="text-xs tracking-[0.3em] text-accent">GET IN TOUCH</p>
-          <h1 className="mt-4 text-3xl font-extralight text-foreground md:text-5xl">Contact Us</h1>
+          <p className="text-xs tracking-[0.3em] text-accent">CONTACT</p>
+          <h1 className="mt-4 text-3xl font-extralight text-foreground md:text-5xl">Get in Touch</h1>
           <div className="mt-6 flex items-center gap-3">
             <div className="h-px w-16 bg-accent" />
             <div className="h-1.5 w-1.5 rotate-45 border border-accent" />
@@ -53,65 +56,48 @@ function ContactPage() {
         </section>
       </RevealSection>
 
-      <section className="mx-auto max-w-7xl px-6 pb-24 lg:px-12">
-        <div className="grid gap-16 lg:grid-cols-2">
-          {/* Contact info */}
+      <section className="mx-auto max-w-7xl px-6 pb-24 lg:px-12 lg:pb-28">
+        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <RevealSection>
-            <div className="space-y-10">
-              {[
-                { label: "OFFICE", content: "APdS Architects\nStudio 405, Business Centre\nBandra West, Mumbai 400050\nIndia" },
-                { label: "EMAIL", content: "info@apdsarchitects.com" },
-                { label: "PHONE", content: "+91 98765 43210" },
-                { label: "WORKING HOURS", content: "Monday — Friday: 10:00 AM — 7:00 PM" },
-              ].map((item) => (
-                <div key={item.label} className="group">
-                  <h3 className="flex items-center gap-3 text-xs tracking-[0.2em] text-accent">
-                    <span className="h-px w-4 bg-accent transition-all group-hover:w-8" />
-                    {item.label}
-                  </h3>
-                  <p className="mt-3 pl-7 text-sm leading-relaxed text-muted-foreground whitespace-pre-line">{item.content}</p>
+            <div className="grid gap-8 border-t border-border pt-8 sm:grid-cols-2">
+              <div>
+                <p className="text-[10px] tracking-[0.22em] text-muted-foreground">ADDRESS</p>
+                <p className="mt-3 text-base font-light leading-relaxed text-foreground">
+                  118 Joo Chiat Road #02-01 <br />
+                  427407
+                </p>
+              </div>
+              <div>
+                <p className="text-[10px] tracking-[0.22em] text-muted-foreground">CONTACT</p>
+                <div className="mt-3 space-y-2 text-base font-light text-foreground">
+                  <p>+65 6288 1618</p>
+                  <p>WhatsApp: +65 9072 1618</p>
+                  <a href="mailto:apds@apdsarchitects.com" className="transition-colors hover:text-accent">
+                    apds@apdsarchitects.com
+                  </a>
                 </div>
-              ))}
+              </div>
             </div>
           </RevealSection>
 
-          {/* Form */}
           <RevealSection>
-            <form onSubmit={handleSubmit} className="space-y-8">
-              {[
-                { label: "NAME", type: "text", key: "name" as const, required: true },
-                { label: "EMAIL", type: "email", key: "email" as const, required: true },
-                { label: "PHONE", type: "tel", key: "phone" as const, required: false },
-              ].map((field) => (
-                <div key={field.key} className="group">
-                  <label className="text-xs tracking-[0.15em] text-muted-foreground transition-colors group-focus-within:text-accent">{field.label}</label>
-                  <input
-                    type={field.type}
-                    value={formData[field.key]}
-                    onChange={(e) => setFormData({ ...formData, [field.key]: e.target.value })}
-                    className="mt-2 w-full border-b border-border bg-transparent py-3 text-sm text-foreground outline-none transition-colors focus:border-accent"
-                    required={field.required}
-                  />
-                </div>
-              ))}
-              <div className="group">
-                <label className="text-xs tracking-[0.15em] text-muted-foreground transition-colors group-focus-within:text-accent">MESSAGE</label>
-                <textarea
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  rows={4}
-                  className="mt-2 w-full border-b border-border bg-transparent py-3 text-sm text-foreground outline-none transition-colors focus:border-accent resize-none"
-                  required
-                />
+            <div className="border-t border-border pt-8">
+              <p className="text-[10px] tracking-[0.22em] text-muted-foreground">SOCIAL</p>
+              <div className="mt-4 grid gap-3">
+                {socialLinks.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group flex items-center justify-between border-b border-border py-3 text-sm text-foreground transition-colors hover:text-accent"
+                  >
+                    <span>{item.label}</span>
+                    <span className="transition-transform group-hover:translate-x-1">→</span>
+                  </a>
+                ))}
               </div>
-              <button
-                type="submit"
-                className="group mt-4 flex items-center gap-3 border border-foreground px-8 py-3 text-xs tracking-[0.25em] text-foreground transition-all hover:bg-foreground hover:text-background"
-              >
-                SEND MESSAGE
-                <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
-              </button>
-            </form>
+            </div>
           </RevealSection>
         </div>
       </section>
