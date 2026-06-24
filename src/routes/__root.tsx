@@ -77,6 +77,7 @@ function RootComponent() {
         <Outlet />
       </main>
       {!isHome && <Footer />}
+      <WhatsAppWidget />
     </>
   );
 }
