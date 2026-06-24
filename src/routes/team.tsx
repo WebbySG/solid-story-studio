@@ -34,14 +34,14 @@ const team: Member[] = [
   { name: "Priya Sharma", image: priyaAsset.url },
 ];
 
-function Tile({ m, ratio = "aspect-[16/10]" }: { m: Member; ratio?: string }) {
+function Tile({ m, ratio = "aspect-[3/4]" }: { m: Member; ratio?: string }) {
   return (
-    <figure className="group relative h-full w-full overflow-hidden">
+    <figure className="group relative w-full overflow-hidden">
       <img
         src={m.image}
         alt={m.name}
         loading="lazy"
-        className={`h-full w-full ${ratio} object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.03]`}
+        className={`w-full ${ratio} object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.03]`}
       />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/0 to-transparent opacity-90" />
       <figcaption className="absolute bottom-0 left-0 right-0 flex items-end justify-between p-4 md:p-5">
