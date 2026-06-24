@@ -81,19 +81,16 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
   const go = (n: number) => setIndex((n + total) % total);
 
   return (
-    <div className="relative w-full">
+    <div className="w-full">
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-secondary md:aspect-[16/8]">
-        {images.map((src, i) => (
-          <img
-            key={i}
-            src={src}
-            alt={`${title} — view ${i + 1}`}
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${i === index ? "opacity-100" : "opacity-0"}`}
-            loading={i === 0 ? "eager" : "lazy"}
-            width={2200}
-            height={1400}
-          />
-        ))}
+        <img
+          src={images[index]}
+          alt={`${title} — featured view ${index + 1}`}
+          className="h-full w-full object-cover transition-opacity duration-500"
+          loading="eager"
+          width={2200}
+          height={1400}
+        />
 
         <button
           aria-label="Previous image"
@@ -115,14 +112,25 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
         </div>
       </div>
 
-      <div className="mt-5 flex items-center justify-center gap-2">
-        {images.map((_, i) => (
+      <div className="mt-5 grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
+        {images.map((src, i) => (
           <button
-            key={i}
-            aria-label={`Go to image ${i + 1}`}
+            key={src}
+            type="button"
+            aria-label={`Show image ${i + 1}`}
             onClick={() => setIndex(i)}
-            className={`h-px transition-all ${i === index ? "w-10 bg-accent" : "w-6 bg-border hover:bg-foreground/40"}`}
-          />
+            className={`group relative aspect-[4/3] overflow-hidden border transition ${i === index ? "border-accent" : "border-border hover:border-accent/60"}`}
+          >
+            <img
+              src={src}
+              alt={`${title} — thumbnail ${i + 1}`}
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              loading="lazy"
+              width={600}
+              height={450}
+            />
+            <span className={`absolute inset-0 transition ${i === index ? "bg-foreground/10" : "bg-foreground/0 group-hover:bg-foreground/10"}`} />
+          </button>
         ))}
       </div>
     </div>
