@@ -79,41 +79,53 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
   const [index, setIndex] = useState(0);
   const total = images.length;
   const stripRef = useRef<HTMLDivElement>(null);
-  const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const dragState = useRef<{ startX: number; startScroll: number; moved: boolean } | null>(null);
+  const dragState = useRef<{ startX: number; startScroll: number; moved: boolean; pointerId: number } | null>(null);
 
-  useEffect(() => {
-    const btn = thumbRefs.current[index];
-    if (btn) btn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-  }, [index]);
+  const scrollToIndex = (i: number) => {
+    const el = stripRef.current;
+    if (!el) return;
+    const child = el.children[i] as HTMLElement | undefined;
+    if (!child) return;
+    const target = child.offsetLeft - (el.clientWidth - child.clientWidth) / 2;
+    el.scrollTo({ left: target, behavior: "smooth" });
+  };
+
+  const handleSelect = (i: number) => {
+    setIndex(i);
+    scrollToIndex(i);
+  };
 
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     const el = stripRef.current;
     if (!el) return;
-    dragState.current = { startX: e.clientX, startScroll: el.scrollLeft, moved: false };
-    el.setPointerCapture(e.pointerId);
+    dragState.current = { startX: e.clientX, startScroll: el.scrollLeft, moved: false, pointerId: e.pointerId };
   };
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     const el = stripRef.current;
     const s = dragState.current;
     if (!el || !s) return;
     const dx = e.clientX - s.startX;
-    if (Math.abs(dx) > 3) s.moved = true;
-    el.scrollLeft = s.startScroll - dx;
+    if (!s.moved && Math.abs(dx) > 6) {
+      s.moved = true;
+      try { el.setPointerCapture(s.pointerId); } catch {}
+    }
+    if (s.moved) el.scrollLeft = s.startScroll - dx;
   };
   const onPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
     const el = stripRef.current;
     if (el && el.hasPointerCapture(e.pointerId)) el.releasePointerCapture(e.pointerId);
-    setTimeout(() => { dragState.current = null; }, 0);
+    const wasDrag = !!dragState.current?.moved;
+    setTimeout(() => { dragState.current = null; }, wasDrag ? 50 : 0);
   };
 
   return (
     <div className="w-full">
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-secondary md:aspect-[16/8]">
         <img
+          key={images[index]}
           src={images[index]}
           alt={`${title} — featured view ${index + 1}`}
-          className="h-full w-full object-cover transition-opacity duration-500"
+          className="h-full w-full object-cover"
           loading="eager"
           width={2200}
           height={1400}
@@ -133,15 +145,15 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
       >
         {images.map((src, i) => (
           <button
-            key={src}
-            ref={(el) => { thumbRefs.current[i] = el; }}
+            key={`${src}-${i}`}
             type="button"
             aria-label={`Show image ${i + 1}`}
+            aria-current={i === index}
             onClick={(e) => {
               if (dragState.current?.moved) { e.preventDefault(); return; }
-              setIndex(i);
+              handleSelect(i);
             }}
-            className={`group relative aspect-[4/3] w-32 flex-shrink-0 overflow-hidden border transition sm:w-40 md:w-44 ${i === index ? "border-accent" : "border-border hover:border-accent/60"}`}
+            className={`group relative aspect-[4/3] flex-shrink-0 basis-[calc((100%-2.25rem)/4)] overflow-hidden border-2 transition ${i === index ? "border-accent ring-2 ring-accent/40" : "border-transparent hover:border-accent/60"}`}
           >
             <img
               src={src}
@@ -152,7 +164,7 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
               width={400}
               height={300}
             />
-            <span className={`absolute inset-0 transition ${i === index ? "bg-foreground/10" : "bg-foreground/0 group-hover:bg-foreground/10"}`} />
+            <span className={`pointer-events-none absolute inset-0 transition ${i === index ? "bg-background/10" : "bg-foreground/0 group-hover:bg-foreground/10"}`} />
           </button>
         ))}
       </div>
