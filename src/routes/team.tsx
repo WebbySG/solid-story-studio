@@ -66,16 +66,15 @@ function TeamPage() {
         </div>
       </header>
 
-      {/* Grid — all 7 visible above the fold */}
-      <section className="mx-auto flex w-full max-w-[1800px] flex-1 flex-col gap-8 px-6 pb-20 lg:px-12 lg:gap-10 lg:pb-32">
+      <section className="mx-auto w-full max-w-[1800px] flex-col gap-8 px-6 pb-20 lg:px-12 lg:gap-10 lg:pb-32">
         {/* Principals: 2 wide */}
-        <div className="grid flex-1 grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8" style={{ minHeight: 0 }}>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
           {principals.map((p) => (
             <Tile key={p.name} m={p} />
           ))}
         </div>
         {/* Studio: 5 wide */}
-        <div className="grid flex-1 grid-cols-2 gap-6 md:grid-cols-5 lg:gap-8" style={{ minHeight: 0 }}>
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-5 lg:gap-8">
           {team.map((m) => (
             <Tile key={m.name} m={m} />
           ))}
