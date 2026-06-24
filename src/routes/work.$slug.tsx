@@ -79,6 +79,19 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
   const [index, setIndex] = useState(0);
   const total = images.length;
   const go = (n: number) => setIndex((n + total) % total);
+  const stripRef = useRef<HTMLDivElement>(null);
+  const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const scrollStrip = (dir: 1 | -1) => {
+    const el = stripRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    const btn = thumbRefs.current[index];
+    if (btn) btn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+  }, [index]);
 
   return (
     <div className="w-full">
@@ -112,26 +125,48 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
         </div>
       </div>
 
-      <div className="mt-5 grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
-        {images.map((src, i) => (
-          <button
-            key={src}
-            type="button"
-            aria-label={`Show image ${i + 1}`}
-            onClick={() => setIndex(i)}
-            className={`group relative aspect-[4/3] overflow-hidden border transition ${i === index ? "border-accent" : "border-border hover:border-accent/60"}`}
-          >
-            <img
-              src={src}
-              alt={`${title} — thumbnail ${i + 1}`}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-              loading="lazy"
-              width={600}
-              height={450}
-            />
-            <span className={`absolute inset-0 transition ${i === index ? "bg-foreground/10" : "bg-foreground/0 group-hover:bg-foreground/10"}`} />
-          </button>
-        ))}
+      <div className="relative mt-5">
+        <button
+          type="button"
+          aria-label="Scroll thumbnails left"
+          onClick={() => scrollStrip(-1)}
+          className="absolute top-1/2 left-0 z-10 -translate-y-1/2 bg-background/80 px-3 py-2 text-xs tracking-[0.2em] text-foreground backdrop-blur-sm transition hover:bg-background"
+        >
+          ←
+        </button>
+        <button
+          type="button"
+          aria-label="Scroll thumbnails right"
+          onClick={() => scrollStrip(1)}
+          className="absolute top-1/2 right-0 z-10 -translate-y-1/2 bg-background/80 px-3 py-2 text-xs tracking-[0.2em] text-foreground backdrop-blur-sm transition hover:bg-background"
+        >
+          →
+        </button>
+        <div
+          ref={stripRef}
+          className="flex gap-3 overflow-x-auto scroll-smooth px-10 pb-2 [scrollbar-width:thin]"
+        >
+          {images.map((src, i) => (
+            <button
+              key={src}
+              ref={(el) => { thumbRefs.current[i] = el; }}
+              type="button"
+              aria-label={`Show image ${i + 1}`}
+              onClick={() => setIndex(i)}
+              className={`group relative aspect-[4/3] w-32 flex-shrink-0 overflow-hidden border transition sm:w-40 md:w-44 ${i === index ? "border-accent" : "border-border hover:border-accent/60"}`}
+            >
+              <img
+                src={src}
+                alt={`${title} — thumbnail ${i + 1}`}
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                loading="lazy"
+                width={400}
+                height={300}
+              />
+              <span className={`absolute inset-0 transition ${i === index ? "bg-foreground/10" : "bg-foreground/0 group-hover:bg-foreground/10"}`} />
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
