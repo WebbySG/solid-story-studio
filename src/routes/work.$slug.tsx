@@ -240,19 +240,19 @@ function ProjectPage() {
         <section className="border-t border-border">
           <div className="mx-auto grid max-w-7xl grid-cols-2 px-6 lg:px-12">
             <Link to="/work/$slug" params={{ slug: prev.slug }} className="group flex flex-col items-start gap-2 py-10 pr-6">
-              <span className="text-[10px] tracking-[0.3em] text-muted-foreground transition-colors group-hover:text-accent">← PREVIOUS</span>
-              <span className="text-base font-light text-foreground md:text-xl">{prev.title}</span>
+              <span className="text-xs tracking-[0.3em] text-muted-foreground transition-colors group-hover:text-accent">← PREVIOUS</span>
+              <span className="text-lg font-light text-foreground md:text-2xl">{prev.title}</span>
             </Link>
             <Link to="/work/$slug" params={{ slug: next.slug }} className="group flex flex-col items-end gap-2 border-l border-border py-10 pl-6 text-right">
-              <span className="text-[10px] tracking-[0.3em] text-muted-foreground transition-colors group-hover:text-accent">NEXT →</span>
-              <span className="text-base font-light text-foreground md:text-xl">{next.title}</span>
+              <span className="text-xs tracking-[0.3em] text-muted-foreground transition-colors group-hover:text-accent">NEXT →</span>
+              <span className="text-lg font-light text-foreground md:text-2xl">{next.title}</span>
             </Link>
           </div>
         </section>
       ) : null}
 
       <section className="mx-auto max-w-7xl px-6 py-16 lg:px-12">
-        <Link to="/work" className="inline-flex items-center gap-3 text-xs tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground">
+        <Link to="/work" className="inline-flex items-center gap-3 text-sm tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground">
           <span className="h-px w-8 bg-current" />
           BACK TO ALL WORK
         </Link>
