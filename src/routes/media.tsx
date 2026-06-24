@@ -1,13 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
+import { mediaPosts } from "@/data/media";
 
 export const Route = createFileRoute("/media")({
   head: () => ({
     meta: [
       { title: "Media — APdS Architects" },
-      { name: "description", content: "Latest news, awards, and publications featuring APdS Architects." },
+      { name: "description", content: "Press, project features, and studio updates from APdS Architects." },
       { property: "og:title", content: "Media — APdS Architects" },
-      { property: "og:description", content: "Latest news, awards, and publications featuring APdS Architects." },
+      { property: "og:description", content: "Press, project features, and studio updates from APdS Architects." },
     ],
   }),
   component: MediaPage,
@@ -18,10 +19,12 @@ function useReveal() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { el.classList.add("revealed"); observer.unobserve(el); } },
-      { threshold: 0.15 }
-    );
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        el.classList.add("revealed");
+        observer.unobserve(el);
+      }
+    }, { threshold: 0.15 });
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
@@ -32,15 +35,6 @@ function RevealSection({ children, className = "" }: { children: React.ReactNode
   const ref = useReveal();
   return <div ref={ref} className={`reveal-on-scroll ${className}`}>{children}</div>;
 }
-
-const mediaItems = [
-  { date: "March 2024", title: "APdS Architects Wins Best Residential Design Award 2024", source: "Architectural Digest India", type: "Award" },
-  { date: "January 2024", title: "The Loft House Featured in AD100 Best Homes", source: "Architectural Digest", type: "Publication" },
-  { date: "November 2023", title: "Sustainability in Modern Indian Architecture — A Conversation with APdS", source: "Design Pataki", type: "Interview" },
-  { date: "September 2023", title: "Horizon Tower Shortlisted for IIID Design Excellence Award", source: "IIID", type: "Award" },
-  { date: "June 2023", title: "Zen Courtyard: Blending Tradition with Modernity", source: "ELLE Decor India", type: "Publication" },
-  { date: "February 2023", title: "APdS Studio Visit — Behind the Design Process", source: "Platform Magazine", type: "Interview" },
-];
 
 function MediaPage() {
   return (
@@ -56,26 +50,27 @@ function MediaPage() {
         </section>
       </RevealSection>
 
-      <section className="mx-auto max-w-4xl px-6 pb-24 lg:px-12">
-        <div className="flex flex-col">
-          {mediaItems.map((item, i) => (
-            <RevealSection key={i}>
-              <article className="group cursor-pointer border-t border-border py-8 px-4 transition-all hover:bg-secondary/30 hover:px-6">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-4">
-                      <span className="inline-flex items-center gap-2 text-xs tracking-[0.15em] text-accent">
-                        <span className="h-1 w-1 rounded-full bg-accent" />
-                        {item.type.toUpperCase()}
-                      </span>
-                      <span className="text-xs text-muted-foreground">{item.date}</span>
-                    </div>
-                    <h3 className="mt-3 text-lg font-light text-foreground transition-colors group-hover:text-accent">{item.title}</h3>
-                    <p className="mt-2 text-xs text-muted-foreground">{item.source}</p>
-                  </div>
-                  <span className="mt-4 text-muted-foreground transition-all group-hover:translate-x-1 group-hover:text-accent">→</span>
+      <section className="mx-auto max-w-5xl px-6 pb-24 lg:px-12">
+        <div className="border-t border-border">
+          {mediaPosts.map((item) => (
+            <RevealSection key={item.slug}>
+              <Link
+                to="/media/$slug"
+                params={{ slug: item.slug }}
+                className="group grid items-start gap-6 border-b border-border py-8 md:grid-cols-[180px_minmax(0,1fr)_32px] md:gap-10"
+              >
+                <div className="pt-1">
+                  <p className="text-[10px] tracking-[0.22em] text-accent">{item.eyebrow.toUpperCase()}</p>
                 </div>
-              </article>
+                <div>
+                  <h2 className="text-2xl font-extralight leading-tight text-foreground transition-colors group-hover:text-accent md:text-[2rem]">
+                    {item.title}
+                  </h2>
+                  <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">{item.excerpt}</p>
+                  <p className="mt-4 text-xs tracking-[0.18em] text-muted-foreground">{item.source.toUpperCase()}</p>
+                </div>
+                <div className="pt-1 text-right text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-accent">→</div>
+              </Link>
             </RevealSection>
           ))}
         </div>

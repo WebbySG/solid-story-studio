@@ -16,6 +16,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WorkSlugRouteImport } from './routes/work.$slug'
+import { Route as MediaSlugRouteImport } from './routes/media.$slug'
 
 const WorkRoute = WorkRouteImport.update({
   id: '/work',
@@ -52,23 +53,30 @@ const WorkSlugRoute = WorkSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => WorkRoute,
 } as any)
+const MediaSlugRoute = MediaSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => MediaRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/media': typeof MediaRoute
+  '/media': typeof MediaRouteWithChildren
   '/team': typeof TeamRoute
   '/work': typeof WorkRouteWithChildren
+  '/media/$slug': typeof MediaSlugRoute
   '/work/$slug': typeof WorkSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/media': typeof MediaRoute
+  '/media': typeof MediaRouteWithChildren
   '/team': typeof TeamRoute
   '/work': typeof WorkRouteWithChildren
+  '/media/$slug': typeof MediaSlugRoute
   '/work/$slug': typeof WorkSlugRoute
 }
 export interface FileRoutesById {
@@ -76,9 +84,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/media': typeof MediaRoute
+  '/media': typeof MediaRouteWithChildren
   '/team': typeof TeamRoute
   '/work': typeof WorkRouteWithChildren
+  '/media/$slug': typeof MediaSlugRoute
   '/work/$slug': typeof WorkSlugRoute
 }
 export interface FileRouteTypes {
@@ -90,9 +99,18 @@ export interface FileRouteTypes {
     | '/media'
     | '/team'
     | '/work'
+    | '/media/$slug'
     | '/work/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/media' | '/team' | '/work' | '/work/$slug'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/media'
+    | '/team'
+    | '/work'
+    | '/media/$slug'
+    | '/work/$slug'
   id:
     | '__root__'
     | '/'
@@ -101,6 +119,7 @@ export interface FileRouteTypes {
     | '/media'
     | '/team'
     | '/work'
+    | '/media/$slug'
     | '/work/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -108,7 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
-  MediaRoute: typeof MediaRoute
+  MediaRoute: typeof MediaRouteWithChildren
   TeamRoute: typeof TeamRoute
   WorkRoute: typeof WorkRouteWithChildren
 }
@@ -164,8 +183,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkSlugRouteImport
       parentRoute: typeof WorkRoute
     }
+    '/media/$slug': {
+      id: '/media/$slug'
+      path: '/$slug'
+      fullPath: '/media/$slug'
+      preLoaderRoute: typeof MediaSlugRouteImport
+      parentRoute: typeof MediaRoute
+    }
   }
 }
+
+interface MediaRouteChildren {
+  MediaSlugRoute: typeof MediaSlugRoute
+}
+
+const MediaRouteChildren: MediaRouteChildren = {
+  MediaSlugRoute: MediaSlugRoute,
+}
+
+const MediaRouteWithChildren = MediaRoute._addFileChildren(MediaRouteChildren)
 
 interface WorkRouteChildren {
   WorkSlugRoute: typeof WorkSlugRoute
@@ -181,7 +217,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
-  MediaRoute: MediaRoute,
+  MediaRoute: MediaRouteWithChildren,
   TeamRoute: TeamRoute,
   WorkRoute: WorkRouteWithChildren,
 }

@@ -7,7 +7,7 @@ export const Route = createFileRoute("/work/$slug")({
     const project = getProject(params.slug);
     const title = project ? `${project.title} — APdS Architects` : "Project — APdS Architects";
     const description = project
-      ? `${project.title}, ${project.location} (${project.year}). ${project.description[0]?.slice(0, 140)}`
+      ? `${project.title}. ${project.description[0]?.slice(0, 150)}`
       : "Project details by APdS Architects.";
     return {
       meta: [
@@ -40,7 +40,10 @@ export const Route = createFileRoute("/work/$slug")({
         <h1 className="text-3xl font-extralight">Something went wrong</h1>
         <button
           className="mt-6 text-xs tracking-[0.2em] text-muted-foreground hover:text-foreground"
-          onClick={() => { router.invalidate(); reset(); }}
+          onClick={() => {
+            router.invalidate();
+            reset();
+          }}
         >
           RETRY
         </button>
@@ -55,10 +58,12 @@ function useReveal() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { el.classList.add("revealed"); observer.unobserve(el); } },
-      { threshold: 0.15 }
-    );
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        el.classList.add("revealed");
+        observer.unobserve(el);
+      }
+    }, { threshold: 0.15 });
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
@@ -77,7 +82,7 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
 
   return (
     <div className="relative w-full">
-      <div className="relative aspect-[16/9] w-full overflow-hidden bg-secondary md:aspect-[21/9]">
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-secondary md:aspect-[16/8]">
         {images.map((src, i) => (
           <img
             key={i}
@@ -85,34 +90,31 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
             alt={`${title} — view ${i + 1}`}
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${i === index ? "opacity-100" : "opacity-0"}`}
             loading={i === 0 ? "eager" : "lazy"}
-            width={2400}
-            height={1350}
+            width={2200}
+            height={1400}
           />
         ))}
 
-        {/* Controls */}
         <button
           aria-label="Previous image"
           onClick={() => go(index - 1)}
-          className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/70 px-4 py-3 text-xs tracking-[0.2em] text-foreground backdrop-blur-sm transition hover:bg-background md:left-8"
+          className="absolute top-1/2 left-4 -translate-y-1/2 bg-background/70 px-4 py-3 text-xs tracking-[0.2em] text-foreground backdrop-blur-sm transition hover:bg-background md:left-8"
         >
           ←
         </button>
         <button
           aria-label="Next image"
           onClick={() => go(index + 1)}
-          className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/70 px-4 py-3 text-xs tracking-[0.2em] text-foreground backdrop-blur-sm transition hover:bg-background md:right-8"
+          className="absolute top-1/2 right-4 -translate-y-1/2 bg-background/70 px-4 py-3 text-xs tracking-[0.2em] text-foreground backdrop-blur-sm transition hover:bg-background md:right-8"
         >
           →
         </button>
 
-        {/* Counter */}
-        <div className="absolute bottom-4 right-4 bg-background/70 px-3 py-1.5 text-[10px] tracking-[0.2em] text-foreground backdrop-blur-sm md:bottom-6 md:right-6">
+        <div className="absolute right-4 bottom-4 bg-background/70 px-3 py-1.5 text-[10px] tracking-[0.2em] text-foreground backdrop-blur-sm md:right-6 md:bottom-6">
           {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
         </div>
       </div>
 
-      {/* Dots */}
       <div className="mt-5 flex items-center justify-center gap-2">
         {images.map((_, i) => (
           <button
@@ -130,21 +132,18 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
 function ProjectPage() {
   const { project } = Route.useLoaderData() as { project: Project };
   const idx = projects.findIndex((p) => p.slug === project.slug);
-  const prev = projects[(idx - 1 + projects.length) % projects.length];
-  const next = projects[(idx + 1) % projects.length];
+  const prev = idx > 0 ? projects[(idx - 1 + projects.length) % projects.length] : null;
+  const next = idx >= 0 && projects.length > 1 ? projects[(idx + 1) % projects.length] : null;
   const carouselImages = [project.image, ...project.gallery.filter((g) => g !== project.image)];
 
   return (
     <div className="pt-20">
-      {/* Title */}
       <section className="mx-auto max-w-7xl px-6 pt-8 pb-8 lg:px-12 lg:pt-12">
         <Reveal>
           <p className="text-xs tracking-[0.3em] text-accent">
-            {project.category.toUpperCase()} · {project.location.toUpperCase()} · {project.year}
+            {project.discipline.toUpperCase()} · {project.category.toUpperCase()}
           </p>
-          <h1 className="mt-4 text-3xl font-extralight text-foreground md:text-5xl lg:text-6xl">
-            {project.title}
-          </h1>
+          <h1 className="mt-4 text-3xl font-extralight text-foreground md:text-5xl lg:text-6xl">{project.title}</h1>
           <div className="mt-6 flex items-center gap-3">
             <div className="h-px w-16 bg-accent" />
             <div className="h-1.5 w-1.5 rotate-45 border border-accent" />
@@ -152,38 +151,36 @@ function ProjectPage() {
         </Reveal>
       </section>
 
-      {/* Carousel — FIRST */}
       <section className="mx-auto max-w-7xl px-6 lg:px-12">
         <Reveal>
           <Carousel images={carouselImages} title={project.title} />
         </Reveal>
       </section>
 
-      {/* Description — AFTER carousel */}
       <section className="mx-auto max-w-7xl px-6 py-20 lg:px-12 lg:py-28">
         <div className="grid gap-12 md:grid-cols-12">
           <Reveal className="md:col-span-4">
             <p className="text-xs tracking-[0.3em] text-accent">OVERVIEW</p>
             <div className="mt-8 space-y-5 text-sm">
+              {project.location ? (
+                <div>
+                  <p className="text-[10px] tracking-[0.2em] text-muted-foreground">LOCATION</p>
+                  <p className="mt-1 font-light text-foreground">{project.location}</p>
+                </div>
+              ) : null}
+              {project.client ? (
+                <div>
+                  <p className="text-[10px] tracking-[0.2em] text-muted-foreground">CLIENT</p>
+                  <p className="mt-1 font-light text-foreground">{project.client}</p>
+                </div>
+              ) : null}
               <div>
-                <p className="text-[10px] tracking-[0.2em] text-muted-foreground">CLIENT</p>
-                <p className="mt-1 font-light text-foreground">{project.client}</p>
+                <p className="text-[10px] tracking-[0.2em] text-muted-foreground">DISCIPLINE</p>
+                <p className="mt-1 font-light text-foreground">{project.discipline}</p>
               </div>
               <div>
-                <p className="text-[10px] tracking-[0.2em] text-muted-foreground">LOCATION</p>
-                <p className="mt-1 font-light text-foreground">{project.location}</p>
-              </div>
-              <div>
-                <p className="text-[10px] tracking-[0.2em] text-muted-foreground">AREA</p>
-                <p className="mt-1 font-light text-foreground">{project.area}</p>
-              </div>
-              <div>
-                <p className="text-[10px] tracking-[0.2em] text-muted-foreground">YEAR</p>
-                <p className="mt-1 font-light text-foreground">{project.year}</p>
-              </div>
-              <div>
-                <p className="text-[10px] tracking-[0.2em] text-muted-foreground">STATUS</p>
-                <p className="mt-1 font-light text-foreground">{project.status}</p>
+                <p className="text-[10px] tracking-[0.2em] text-muted-foreground">CATEGORY</p>
+                <p className="mt-1 font-light text-foreground">{project.category}</p>
               </div>
             </div>
           </Reveal>
@@ -191,12 +188,12 @@ function ProjectPage() {
           <Reveal className="md:col-span-8">
             <p className="text-xs tracking-[0.3em] text-accent">DESCRIPTION</p>
             <div className="mt-8 space-y-6 text-base font-light leading-relaxed text-foreground/90 md:text-lg">
-              {project.description.map((p, i) => (
-                <p key={i}>{p}</p>
+              {project.description.map((p) => (
+                <p key={p}>{p}</p>
               ))}
             </div>
 
-            <div className="mt-12 grid gap-6 border-t border-border pt-8 sm:grid-cols-3">
+            <div className="mt-12 grid gap-6 border-t border-border pt-8 sm:grid-cols-2 lg:grid-cols-4">
               {project.facts.map((f) => (
                 <div key={f.label}>
                   <p className="text-[10px] tracking-[0.2em] text-muted-foreground">{f.label.toUpperCase()}</p>
@@ -208,37 +205,23 @@ function ProjectPage() {
         </div>
       </section>
 
-      {/* Prev / Next */}
-      <section className="border-t border-border">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 px-6 lg:px-12">
-          <Link
-            to="/work/$slug"
-            params={{ slug: prev.slug }}
-            className="group flex flex-col items-start gap-2 py-10 pr-6"
-          >
-            <span className="text-[10px] tracking-[0.3em] text-muted-foreground transition-colors group-hover:text-accent">
-              ← PREVIOUS
-            </span>
-            <span className="text-base font-light text-foreground md:text-xl">{prev.title}</span>
-          </Link>
-          <Link
-            to="/work/$slug"
-            params={{ slug: next.slug }}
-            className="group flex flex-col items-end gap-2 border-l border-border py-10 pl-6 text-right"
-          >
-            <span className="text-[10px] tracking-[0.3em] text-muted-foreground transition-colors group-hover:text-accent">
-              NEXT →
-            </span>
-            <span className="text-base font-light text-foreground md:text-xl">{next.title}</span>
-          </Link>
-        </div>
-      </section>
+      {prev && next ? (
+        <section className="border-t border-border">
+          <div className="mx-auto grid max-w-7xl grid-cols-2 px-6 lg:px-12">
+            <Link to="/work/$slug" params={{ slug: prev.slug }} className="group flex flex-col items-start gap-2 py-10 pr-6">
+              <span className="text-[10px] tracking-[0.3em] text-muted-foreground transition-colors group-hover:text-accent">← PREVIOUS</span>
+              <span className="text-base font-light text-foreground md:text-xl">{prev.title}</span>
+            </Link>
+            <Link to="/work/$slug" params={{ slug: next.slug }} className="group flex flex-col items-end gap-2 border-l border-border py-10 pl-6 text-right">
+              <span className="text-[10px] tracking-[0.3em] text-muted-foreground transition-colors group-hover:text-accent">NEXT →</span>
+              <span className="text-base font-light text-foreground md:text-xl">{next.title}</span>
+            </Link>
+          </div>
+        </section>
+      ) : null}
 
       <section className="mx-auto max-w-7xl px-6 py-16 lg:px-12">
-        <Link
-          to="/work"
-          className="inline-flex items-center gap-3 text-xs tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
-        >
+        <Link to="/work" className="inline-flex items-center gap-3 text-xs tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground">
           <span className="h-px w-8 bg-current" />
           BACK TO ALL WORK
         </Link>
