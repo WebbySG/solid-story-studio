@@ -191,34 +191,34 @@ function ProjectPage() {
       <section className="mx-auto max-w-7xl px-6 py-20 lg:px-12 lg:py-28">
         <div className="grid gap-12 md:grid-cols-12">
           <Reveal className="md:col-span-4">
-            <p className="text-xs tracking-[0.3em] text-accent">OVERVIEW</p>
-            <div className="mt-8 space-y-5 text-sm">
+            <p className="text-sm tracking-[0.3em] text-accent">OVERVIEW</p>
+            <div className="mt-8 space-y-6 text-base">
               {project.location ? (
                 <div>
-                  <p className="text-[10px] tracking-[0.2em] text-muted-foreground">LOCATION</p>
-                  <p className="mt-1 font-light text-foreground">{project.location}</p>
+                  <p className="text-xs tracking-[0.2em] text-muted-foreground">LOCATION</p>
+                  <p className="mt-1.5 text-lg font-light text-foreground">{project.location}</p>
                 </div>
               ) : null}
               {project.client ? (
                 <div>
-                  <p className="text-[10px] tracking-[0.2em] text-muted-foreground">CLIENT</p>
-                  <p className="mt-1 font-light text-foreground">{project.client}</p>
+                  <p className="text-xs tracking-[0.2em] text-muted-foreground">CLIENT</p>
+                  <p className="mt-1.5 text-lg font-light text-foreground">{project.client}</p>
                 </div>
               ) : null}
               <div>
-                <p className="text-[10px] tracking-[0.2em] text-muted-foreground">DISCIPLINE</p>
-                <p className="mt-1 font-light text-foreground">{project.discipline}</p>
+                <p className="text-xs tracking-[0.2em] text-muted-foreground">DISCIPLINE</p>
+                <p className="mt-1.5 text-lg font-light text-foreground">{project.discipline}</p>
               </div>
               <div>
-                <p className="text-[10px] tracking-[0.2em] text-muted-foreground">CATEGORY</p>
-                <p className="mt-1 font-light text-foreground">{project.category}</p>
+                <p className="text-xs tracking-[0.2em] text-muted-foreground">CATEGORY</p>
+                <p className="mt-1.5 text-lg font-light text-foreground">{project.category}</p>
               </div>
             </div>
           </Reveal>
 
           <Reveal className="md:col-span-8">
-            <p className="text-xs tracking-[0.3em] text-accent">DESCRIPTION</p>
-            <div className="mt-8 space-y-6 text-base font-light leading-relaxed text-foreground/90 md:text-lg">
+            <p className="text-sm tracking-[0.3em] text-accent">DESCRIPTION</p>
+            <div className="mt-8 space-y-6 text-lg font-light leading-relaxed text-foreground/90 md:text-xl">
               {project.description.map((p) => (
                 <p key={p}>{p}</p>
               ))}
@@ -227,8 +227,8 @@ function ProjectPage() {
             <div className="mt-12 grid gap-6 border-t border-border pt-8 sm:grid-cols-2 lg:grid-cols-4">
               {project.facts.map((f) => (
                 <div key={f.label}>
-                  <p className="text-[10px] tracking-[0.2em] text-muted-foreground">{f.label.toUpperCase()}</p>
-                  <p className="mt-1 text-sm font-light text-foreground">{f.value}</p>
+                  <p className="text-xs tracking-[0.2em] text-muted-foreground">{f.label.toUpperCase()}</p>
+                  <p className="mt-1.5 text-base font-light text-foreground">{f.value}</p>
                 </div>
               ))}
             </div>
