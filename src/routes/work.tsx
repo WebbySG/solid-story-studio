@@ -94,22 +94,25 @@ function WorkPage() {
 
       <section className="mx-auto max-w-7xl px-6 pb-24 lg:px-12">
         {filtered.length > 0 ? (
-          <div className="grid gap-10 lg:grid-cols-2">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
             {filtered.map((project) => (
               <RevealSection key={project.slug}>
                 <Link to="/work/$slug" params={{ slug: project.slug }} className="group block">
-                  <div className="relative aspect-[16/11] overflow-hidden bg-secondary">
-                    <img src={project.image} alt={project.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" loading="lazy" width={1600} height={1100} />
-                  </div>
-                  <div className="grid gap-4 border-b border-border py-5 md:grid-cols-[180px_minmax(0,1fr)_24px] md:items-start">
-                    <div>
-                      <p className="text-[10px] tracking-[0.22em] text-accent">{project.category.toUpperCase()}</p>
+                  <div className="relative aspect-[4/5] overflow-hidden bg-secondary">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      loading="lazy"
+                      width={1200}
+                      height={1500}
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-foreground/0 transition-colors duration-500 group-hover:bg-foreground/55" />
+                    <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center px-6 text-center opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                      <p className="text-[10px] tracking-[0.3em] text-accent">{project.category.toUpperCase()}</p>
+                      <h2 className="mt-3 text-2xl font-extralight text-background md:text-3xl">{project.title}</h2>
+                      <span className="mt-4 h-px w-10 bg-accent" />
                     </div>
-                    <div>
-                      <h2 className="text-2xl font-extralight text-foreground">{project.title}</h2>
-                      <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">{project.description[0]}</p>
-                    </div>
-                    <div className="pt-1 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-accent">→</div>
                   </div>
                 </Link>
               </RevealSection>
@@ -123,6 +126,7 @@ function WorkPage() {
           </RevealSection>
         )}
       </section>
+
     </div>
   );
 }
