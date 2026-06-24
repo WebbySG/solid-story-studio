@@ -6,6 +6,15 @@ import jalanParas5 from "@/assets/jalan-paras-5.png.asset.json";
 import jalanParas6 from "@/assets/jalan-paras-6.png.asset.json";
 import jalanParas7 from "@/assets/jalan-paras-7.png.asset.json";
 import jalanParas8 from "@/assets/jalan-paras-8.png.asset.json";
+import jalanParas7943 from "@/assets/jalan-paras-7943.png.asset.json";
+import jalanParas7948 from "@/assets/jalan-paras-7948.png.asset.json";
+import jalanParas7951 from "@/assets/jalan-paras-7951.png.asset.json";
+import jalanParas7958 from "@/assets/jalan-paras-7958.png.asset.json";
+import jalanParas7966 from "@/assets/jalan-paras-7966.png.asset.json";
+import jalanParas7976 from "@/assets/jalan-paras-7976.png.asset.json";
+import jalanParas7981 from "@/assets/jalan-paras-7981.png.asset.json";
+import jalanParas7986 from "@/assets/jalan-paras-7986.png.asset.json";
+import jalanParas7987 from "@/assets/jalan-paras-7987.png.asset.json";
 
 export type ProjectDiscipline = "Architectural" | "Interior Design";
 export type ProjectCategory = "Residential" | "Commercial" | "Institutional";
@@ -32,7 +41,7 @@ export const architecturalCategories: ProjectCategory[] = ["Residential", "Insti
 export const projects: Project[] = [
   {
     slug: "jalan-paras",
-    image: jalanParas1.url,
+    image: jalanParas7943.url,
     title: "Jalan Paras",
     discipline: "Architectural",
     category: "Residential",
@@ -44,6 +53,15 @@ export const projects: Project[] = [
       "Generous open spaces and roof terraces are integrated throughout the development, maximising opportunities for greenery, natural light, and outdoor living. The result is a pair of bright and open homes that transform a challenging site condition into a distinctive architectural response with a strong connection to nature.",
     ],
     gallery: [
+      jalanParas7943.url,
+      jalanParas7948.url,
+      jalanParas7951.url,
+      jalanParas7958.url,
+      jalanParas7966.url,
+      jalanParas7976.url,
+      jalanParas7981.url,
+      jalanParas7986.url,
+      jalanParas7987.url,
       jalanParas1.url,
       jalanParas2.url,
       jalanParas3.url,
