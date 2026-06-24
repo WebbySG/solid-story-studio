@@ -50,7 +50,7 @@ function MediaPage() {
         </section>
       </RevealSection>
 
-      <section className="mx-auto max-w-5xl px-6 pb-24 lg:px-12">
+      <section className="mx-auto max-w-7xl px-6 pb-24 lg:px-12">
         <div className="border-t border-border">
           {mediaPosts.map((item) => (
             <RevealSection key={item.slug}>
