@@ -25,7 +25,7 @@ type Principal = Member & { objectPos?: string };
 
 const principals: Principal[] = [
   { name: "Desmond Chen", image: desmondImg, objectPos: "object-[center_25%]" },
-  { name: "Ng Sin Yong", image: sinyongImg, objectPos: "object-[center_45%]" },
+  { name: "Ng Sin Yong", image: sinyongImg, objectPos: "object-[center_30%]" },
 ];
 
 const team: Member[] = [
