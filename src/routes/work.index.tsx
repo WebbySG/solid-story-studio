@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { architecturalCategories, projectDisciplines, projects, type ProjectCategory, type ProjectDiscipline } from "@/data/projects";
 
-export const Route = createFileRoute("/work")({
+export const Route = createFileRoute("/work/")({
   head: () => ({
     meta: [
       { title: "Work — APdS Architects" },
