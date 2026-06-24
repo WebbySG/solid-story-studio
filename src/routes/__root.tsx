@@ -67,13 +67,15 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isHome = pathname === "/";
   return (
     <>
       <Header />
       <main>
         <Outlet />
       </main>
-      <Footer />
+      {!isHome && <Footer />}
     </>
   );
 }
