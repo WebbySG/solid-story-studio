@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import desmondImg from "@/assets/team-desmond.jpg";
-import sinyongImg from "@/assets/team-sinyong.jpg";
+import sinyongAsset from "@/assets/team-sinyong.png.asset.json";
 import jasonAsset from "@/assets/team-jason.jpg.asset.json";
 import jennAsset from "@/assets/team-jenn.jpg.asset.json";
 import clarenceAsset from "@/assets/team-clarence.jpg.asset.json";
