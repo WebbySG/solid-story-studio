@@ -21,9 +21,11 @@ export const Route = createFileRoute("/team")({
 
 type Member = { name: string; image: string };
 
-const principals: Member[] = [
-  { name: "Desmond Chen", image: desmondImg },
-  { name: "Ng Sin Yong", image: sinyongImg },
+type Principal = Member & { objectPos?: string };
+
+const principals: Principal[] = [
+  { name: "Desmond Chen", image: desmondImg, objectPos: "object-[center_25%]" },
+  { name: "Ng Sin Yong", image: sinyongImg, objectPos: "object-[center_10%]" },
 ];
 
 const team: Member[] = [
@@ -70,7 +72,7 @@ function TeamPage() {
         {/* Principals: waist-up, single frame */}
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:gap-20">
           {principals.map((p) => (
-            <Tile key={p.name} m={p} ratio="aspect-[4/3]" objectPos="object-[center_25%]" />
+            <Tile key={p.name} m={p} ratio="aspect-[4/3]" objectPos={p.objectPos ?? "object-[center_25%]"} />
           ))}
         </div>
         {/* Studio: 5 wide */}
