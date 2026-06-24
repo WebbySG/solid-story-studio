@@ -78,20 +78,34 @@ function Reveal({ children, className = "" }: { children: React.ReactNode; class
 function Carousel({ images, title }: { images: string[]; title: string }) {
   const [index, setIndex] = useState(0);
   const total = images.length;
-  const go = (n: number) => setIndex((n + total) % total);
   const stripRef = useRef<HTMLDivElement>(null);
   const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
-
-  const scrollStrip = (dir: 1 | -1) => {
-    const el = stripRef.current;
-    if (!el) return;
-    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
-  };
+  const dragState = useRef<{ startX: number; startScroll: number; moved: boolean } | null>(null);
 
   useEffect(() => {
     const btn = thumbRefs.current[index];
     if (btn) btn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
   }, [index]);
+
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = stripRef.current;
+    if (!el) return;
+    dragState.current = { startX: e.clientX, startScroll: el.scrollLeft, moved: false };
+    el.setPointerCapture(e.pointerId);
+  };
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = stripRef.current;
+    const s = dragState.current;
+    if (!el || !s) return;
+    const dx = e.clientX - s.startX;
+    if (Math.abs(dx) > 3) s.moved = true;
+    el.scrollLeft = s.startScroll - dx;
+  };
+  const onPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = stripRef.current;
+    if (el && el.hasPointerCapture(e.pointerId)) el.releasePointerCapture(e.pointerId);
+    setTimeout(() => { dragState.current = null; }, 0);
+  };
 
   return (
     <div className="w-full">
@@ -104,69 +118,43 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
           width={2200}
           height={1400}
         />
-
-        <button
-          aria-label="Previous image"
-          onClick={() => go(index - 1)}
-          className="absolute top-1/2 left-4 -translate-y-1/2 bg-background/70 px-4 py-3 text-xs tracking-[0.2em] text-foreground backdrop-blur-sm transition hover:bg-background md:left-8"
-        >
-          ←
-        </button>
-        <button
-          aria-label="Next image"
-          onClick={() => go(index + 1)}
-          className="absolute top-1/2 right-4 -translate-y-1/2 bg-background/70 px-4 py-3 text-xs tracking-[0.2em] text-foreground backdrop-blur-sm transition hover:bg-background md:right-8"
-        >
-          →
-        </button>
-
         <div className="absolute right-4 bottom-4 bg-background/70 px-3 py-1.5 text-[10px] tracking-[0.2em] text-foreground backdrop-blur-sm md:right-6 md:bottom-6">
           {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
         </div>
       </div>
 
-      <div className="relative mt-5">
-        <button
-          type="button"
-          aria-label="Scroll thumbnails left"
-          onClick={() => scrollStrip(-1)}
-          className="absolute top-1/2 left-0 z-10 -translate-y-1/2 bg-background/80 px-3 py-2 text-xs tracking-[0.2em] text-foreground backdrop-blur-sm transition hover:bg-background"
-        >
-          ←
-        </button>
-        <button
-          type="button"
-          aria-label="Scroll thumbnails right"
-          onClick={() => scrollStrip(1)}
-          className="absolute top-1/2 right-0 z-10 -translate-y-1/2 bg-background/80 px-3 py-2 text-xs tracking-[0.2em] text-foreground backdrop-blur-sm transition hover:bg-background"
-        >
-          →
-        </button>
-        <div
-          ref={stripRef}
-          className="flex gap-3 overflow-x-auto scroll-smooth px-10 pb-2 [scrollbar-width:thin]"
-        >
-          {images.map((src, i) => (
-            <button
-              key={src}
-              ref={(el) => { thumbRefs.current[i] = el; }}
-              type="button"
-              aria-label={`Show image ${i + 1}`}
-              onClick={() => setIndex(i)}
-              className={`group relative aspect-[4/3] w-32 flex-shrink-0 overflow-hidden border transition sm:w-40 md:w-44 ${i === index ? "border-accent" : "border-border hover:border-accent/60"}`}
-            >
-              <img
-                src={src}
-                alt={`${title} — thumbnail ${i + 1}`}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                loading="lazy"
-                width={400}
-                height={300}
-              />
-              <span className={`absolute inset-0 transition ${i === index ? "bg-foreground/10" : "bg-foreground/0 group-hover:bg-foreground/10"}`} />
-            </button>
-          ))}
-        </div>
+      <div
+        ref={stripRef}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+        className="mt-5 flex cursor-grab gap-3 overflow-x-auto pb-2 select-none active:cursor-grabbing [scrollbar-width:thin]"
+      >
+        {images.map((src, i) => (
+          <button
+            key={src}
+            ref={(el) => { thumbRefs.current[i] = el; }}
+            type="button"
+            aria-label={`Show image ${i + 1}`}
+            onClick={(e) => {
+              if (dragState.current?.moved) { e.preventDefault(); return; }
+              setIndex(i);
+            }}
+            className={`group relative aspect-[4/3] w-32 flex-shrink-0 overflow-hidden border transition sm:w-40 md:w-44 ${i === index ? "border-accent" : "border-border hover:border-accent/60"}`}
+          >
+            <img
+              src={src}
+              alt={`${title} — thumbnail ${i + 1}`}
+              className="pointer-events-none h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              loading="lazy"
+              draggable={false}
+              width={400}
+              height={300}
+            />
+            <span className={`absolute inset-0 transition ${i === index ? "bg-foreground/10" : "bg-foreground/0 group-hover:bg-foreground/10"}`} />
+          </button>
+        ))}
       </div>
     </div>
   );
