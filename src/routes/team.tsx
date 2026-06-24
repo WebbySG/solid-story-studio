@@ -21,9 +21,11 @@ export const Route = createFileRoute("/team")({
 
 type Member = { name: string; image: string };
 
-const principals: Member[] = [
-  { name: "Desmond Chen", image: desmondImg },
-  { name: "Ng Sin Yong", image: sinyongImg },
+type Principal = Member & { objectPos?: string };
+
+const principals: Principal[] = [
+  { name: "Desmond Chen", image: desmondImg, objectPos: "object-[center_25%]" },
+  { name: "Ng Sin Yong", image: sinyongImg, objectPos: "object-[center_10%]" },
 ];
 
 const team: Member[] = [
