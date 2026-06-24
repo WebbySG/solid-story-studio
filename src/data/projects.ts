@@ -6,6 +6,14 @@ import jalanParas5 from "@/assets/jalan-paras-5.png.asset.json";
 import jalanParas6 from "@/assets/jalan-paras-6.png.asset.json";
 import jalanParas7 from "@/assets/jalan-paras-7.png.asset.json";
 import jalanParas8 from "@/assets/jalan-paras-8.png.asset.json";
+import jalanParas7893 from "@/assets/jalan-paras-7893.png.asset.json";
+import jalanParas7898 from "@/assets/jalan-paras-7898.png.asset.json";
+import jalanParas7904 from "@/assets/jalan-paras-7904.png.asset.json";
+import jalanParas7912 from "@/assets/jalan-paras-7912.png.asset.json";
+import jalanParas7914 from "@/assets/jalan-paras-7914.png.asset.json";
+import jalanParas7926 from "@/assets/jalan-paras-7926.png.asset.json";
+import jalanParas7929 from "@/assets/jalan-paras-7929.png.asset.json";
+import jalanParas7933 from "@/assets/jalan-paras-7933.png.asset.json";
 import jalanParas7943 from "@/assets/jalan-paras-7943.png.asset.json";
 import jalanParas7948 from "@/assets/jalan-paras-7948.png.asset.json";
 import jalanParas7951 from "@/assets/jalan-paras-7951.png.asset.json";
@@ -54,6 +62,14 @@ export const projects: Project[] = [
     ],
     gallery: [
       jalanParas7943.url,
+      jalanParas7893.url,
+      jalanParas7898.url,
+      jalanParas7904.url,
+      jalanParas7912.url,
+      jalanParas7914.url,
+      jalanParas7926.url,
+      jalanParas7929.url,
+      jalanParas7933.url,
       jalanParas7948.url,
       jalanParas7951.url,
       jalanParas7958.url,
