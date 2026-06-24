@@ -236,7 +236,7 @@ function ProjectPage() {
               ))}
             </div>
 
-            <div className="mt-12 grid gap-6 border-t border-border pt-8 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-12 grid grid-cols-2 gap-6 border-t border-border pt-8">
               {project.facts.map((f) => (
                 <div key={f.label}>
                   <p className="text-xs tracking-[0.2em] text-muted-foreground">{f.label.toUpperCase()}</p>
