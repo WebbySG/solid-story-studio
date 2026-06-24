@@ -1,11 +1,3 @@
-import jalanParas1 from "@/assets/jalan-paras-1.png.asset.json";
-import jalanParas2 from "@/assets/jalan-paras-2.png.asset.json";
-import jalanParas3 from "@/assets/jalan-paras-3.png.asset.json";
-import jalanParas4 from "@/assets/jalan-paras-4.png.asset.json";
-import jalanParas5 from "@/assets/jalan-paras-5.png.asset.json";
-import jalanParas6 from "@/assets/jalan-paras-6.png.asset.json";
-import jalanParas7 from "@/assets/jalan-paras-7.png.asset.json";
-import jalanParas8 from "@/assets/jalan-paras-8.png.asset.json";
 import jalanParas7893 from "@/assets/jalan-paras-7893.png.asset.json";
 import jalanParas7898 from "@/assets/jalan-paras-7898.png.asset.json";
 import jalanParas7904 from "@/assets/jalan-paras-7904.png.asset.json";
@@ -78,14 +70,6 @@ export const projects: Project[] = [
       jalanParas7981.url,
       jalanParas7986.url,
       jalanParas7987.url,
-      jalanParas1.url,
-      jalanParas2.url,
-      jalanParas3.url,
-      jalanParas4.url,
-      jalanParas5.url,
-      jalanParas6.url,
-      jalanParas7.url,
-      jalanParas8.url,
     ],
     facts: [
       { label: "Typology", value: "Pair of Semi-Detached Houses" },
