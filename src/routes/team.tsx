@@ -54,9 +54,9 @@ function Tile({ m, ratio = "aspect-[16/10]" }: { m: Member; ratio?: string }) {
 
 function TeamPage() {
   return (
-    <div className="flex min-h-screen flex-col pt-20">
+    <div className="flex min-h-screen flex-col pt-32 lg:pt-40">
       {/* Header */}
-      <header className="mx-auto flex w-full max-w-[1800px] items-end justify-between px-6 pb-4 pt-2 lg:px-12">
+      <header className="mx-auto flex w-full max-w-[1800px] items-end justify-between px-6 pb-10 pt-2 lg:px-12 lg:pb-14">
         <h1 className="text-2xl font-extralight tracking-tight text-foreground md:text-3xl">
           Our <span className="text-accent">Team</span>
         </h1>
@@ -67,15 +67,15 @@ function TeamPage() {
       </header>
 
       {/* Grid — all 7 visible above the fold */}
-      <section className="mx-auto flex w-full max-w-[1800px] flex-1 flex-col gap-3 px-6 pb-6 lg:px-12 lg:pb-10">
+      <section className="mx-auto flex w-full max-w-[1800px] flex-1 flex-col gap-8 px-6 pb-20 lg:px-12 lg:gap-10 lg:pb-32">
         {/* Principals: 2 wide */}
-        <div className="grid flex-1 grid-cols-1 gap-3 md:grid-cols-2" style={{ minHeight: 0 }}>
+        <div className="grid flex-1 grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8" style={{ minHeight: 0 }}>
           {principals.map((p) => (
             <Tile key={p.name} m={p} />
           ))}
         </div>
         {/* Studio: 5 wide */}
-        <div className="grid flex-1 grid-cols-2 gap-3 md:grid-cols-5" style={{ minHeight: 0 }}>
+        <div className="grid flex-1 grid-cols-2 gap-6 md:grid-cols-5 lg:gap-8" style={{ minHeight: 0 }}>
           {team.map((m) => (
             <Tile key={m.name} m={m} />
           ))}
