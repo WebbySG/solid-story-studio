@@ -34,14 +34,14 @@ const team: Member[] = [
   { name: "Priya Sharma", image: priyaAsset.url },
 ];
 
-function Tile({ m, ratio = "aspect-[3/4]" }: { m: Member; ratio?: string }) {
+function Tile({ m, ratio = "aspect-[3/4]", objectPos = "object-center" }: { m: Member; ratio?: string; objectPos?: string }) {
   return (
     <figure className="group relative w-full overflow-hidden">
       <img
         src={m.image}
         alt={m.name}
         loading="lazy"
-        className={`w-full ${ratio} object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.03]`}
+        className={`w-full ${ratio} object-cover ${objectPos} grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-[1.03]`}
       />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/0 to-transparent opacity-90" />
       <figcaption className="absolute bottom-0 left-0 right-0 flex items-end justify-between p-4 md:p-5">
@@ -56,7 +56,7 @@ function TeamPage() {
   return (
     <div className="flex min-h-screen flex-col pt-32 lg:pt-40">
       {/* Header */}
-      <header className="mx-auto flex w-full max-w-[1800px] items-end justify-between px-6 pb-10 pt-2 lg:px-12 lg:pb-14">
+      <header className="mx-auto flex w-full max-w-[1800px] items-end justify-between px-6 pb-16 pt-2 lg:px-12 lg:pb-24">
         <h1 className="text-2xl font-extralight tracking-tight text-foreground md:text-3xl">
           Our <span className="text-accent">Team</span>
         </h1>
@@ -66,15 +66,15 @@ function TeamPage() {
         </div>
       </header>
 
-      <section className="mx-auto w-full max-w-[1800px] flex-col gap-8 px-6 pb-20 lg:px-12 lg:gap-10 lg:pb-32">
-        {/* Principals: 2 wide */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
+      <section className="mx-auto flex w-full max-w-[1800px] flex-col gap-20 px-6 pb-24 lg:gap-28 lg:px-12 lg:pb-40">
+        {/* Principals: waist-up, single frame */}
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:gap-20">
           {principals.map((p) => (
-            <Tile key={p.name} m={p} />
+            <Tile key={p.name} m={p} ratio="aspect-[4/3]" objectPos="object-top" />
           ))}
         </div>
         {/* Studio: 5 wide */}
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-5 lg:gap-8">
+        <div className="grid grid-cols-2 gap-10 md:grid-cols-5 lg:gap-14">
           {team.map((m) => (
             <Tile key={m.name} m={m} />
           ))}
