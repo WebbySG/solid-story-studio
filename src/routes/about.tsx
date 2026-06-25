@@ -153,18 +153,20 @@ function AboutPage() {
         <div className="mt-16 space-y-24">
           {leaders.map((leader, i) => (
             <RevealSection key={leader.name}>
-              <article className="grid gap-10 md:grid-cols-12 md:gap-12">
+              <article className="grid gap-10 md:grid-cols-12 md:gap-12 md:items-start">
                 <div className={`md:col-span-5 ${i % 2 === 1 ? "md:order-2" : ""}`}>
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={leader.image}
-                      alt={leader.name}
-                      className="aspect-[4/5] w-full object-cover"
-                      loading="lazy"
-                      width={1000}
-                      height={1250}
-                    />
-                    <div className={`absolute -bottom-3 -z-10 h-full w-full border border-accent/20 ${i % 2 === 1 ? "-left-3" : "-right-3"}`} />
+                  <div className="md:sticky md:top-28">
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={leader.image}
+                        alt={leader.name}
+                        className="aspect-[4/5] w-full object-cover"
+                        loading="lazy"
+                        width={1000}
+                        height={1250}
+                      />
+                      <div className={`absolute -bottom-3 -z-10 h-full w-full border border-accent/20 ${i % 2 === 1 ? "-left-3" : "-right-3"}`} />
+                    </div>
                   </div>
                 </div>
 
