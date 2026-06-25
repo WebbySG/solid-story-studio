@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import apdsLogo from "@/assets/apds-logo-wide.png.asset.json";
+import apdsLogo from "@/assets/apds-logo-aligned.png.asset.json";
 
 const navLinks = [
   { to: "/" as const, label: "HOME" },
