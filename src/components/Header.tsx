@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import apdsLogo from "@/assets/apds-logo.png.asset.json";
+import apdsLogo from "@/assets/apds-logo-wide.png.asset.json";
 
 const navLinks = [
   { to: "/" as const, label: "HOME" },
@@ -17,9 +17,8 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-12">
-        <Link to="/" className="flex items-center gap-3">
-          <img src={apdsLogo.url} alt="APdS Architects" className="h-10 w-10 rounded-full object-cover" width={40} height={40} />
-          <span className="text-sm font-light tracking-[0.25em] text-foreground">APdS ARCHITECTS</span>
+        <Link to="/" className="flex items-center">
+          <img src={apdsLogo.url} alt="APdS Architects — Architectural · Interior · Landscape" className="h-10 w-auto object-contain md:h-12" />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
