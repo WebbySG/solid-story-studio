@@ -157,13 +157,3 @@ function FactRow({ label, value }: { label: string; value: string }) {
     </div>
   );
 }
-
-
-function FactRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex items-baseline justify-between gap-4 border-b border-border pb-2">
-      <span className="text-[9px] uppercase tracking-[0.25em] text-muted-foreground">{label}</span>
-      <span className="text-right text-xs font-light text-foreground">{value}</span>
-    </div>
-  );
-}
