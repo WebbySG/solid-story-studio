@@ -53,28 +53,16 @@ function WorkPage() {
       {/* Editorial header */}
       <section className="mx-auto max-w-7xl px-6 pt-16 pb-12 lg:px-12 lg:pt-24 lg:pb-16">
         <Reveal>
-          <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-baseline">
-            <span className="text-[10px] font-medium uppercase tracking-[0.4em] text-accent">
-              Portfolio Index
-            </span>
-            <div className="hidden h-px w-12 bg-accent/40 md:block" />
-            <span className="text-[10px] uppercase tracking-[0.4em] text-muted-foreground">Vol. 01</span>
-          </div>
-
-          <div className="relative">
-            <h1 className="text-6xl font-extralight leading-[0.9] tracking-tight text-foreground md:text-8xl lg:text-[9rem]">
-              Selected<br />
-              <span className="ml-[0.1em] md:ml-[0.5em]">Projects</span>
-            </h1>
-
-            <div className="mt-10 max-w-sm md:absolute md:bottom-3 md:right-0 md:mt-0">
-              <p className="border-l border-accent pl-6 text-sm font-light leading-relaxed text-muted-foreground md:text-base">
-                A study of form, light, and the enduring nature of materiality. Each project is a quiet dialogue between site and structure.
-              </p>
-            </div>
+          <h1 className="text-4xl font-extralight tracking-tight text-foreground md:text-5xl">
+            Our <span className="text-accent">Work</span>
+          </h1>
+          <div className="mt-6 flex items-center gap-3">
+            <div className="h-px w-16 bg-accent" />
+            <div className="h-1.5 w-1.5 rotate-45 border border-accent" />
           </div>
         </Reveal>
       </section>
+
 
       {/* Filters */}
       <section className="mx-auto max-w-7xl px-6 lg:px-12">
