@@ -29,11 +29,11 @@ const principals: Principal[] = [
 ];
 
 const team: Member[] = [
-  { name: "Jenn Lim", image: jennAsset.url },
-  { name: "Jason Tan", image: jasonAsset.url },
-  { name: "Clarence Goh", image: clarenceAsset.url },
-  { name: "Mimi Nguyen", image: mimiAsset.url },
-  { name: "Priya Sharma", image: priyaAsset.url },
+  { name: "Jenn", image: jennAsset.url },
+  { name: "Jason", image: jasonAsset.url },
+  { name: "Clarence", image: clarenceAsset.url },
+  { name: "Mimi", image: mimiAsset.url },
+  { name: "Priya", image: priyaAsset.url },
 ];
 
 function Tile({ m, ratio = "aspect-[3/4]", objectPos = "object-center" }: { m: Member; ratio?: string; objectPos?: string }) {
