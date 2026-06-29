@@ -1,6 +1,6 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
-import { Instagram } from "lucide-react";
+import { ChevronDown, Instagram } from "lucide-react";
 import apdsLogo from "@/assets/2026-latest-apds-logo.png.asset.json";
 
 const navLinks = [
@@ -9,13 +9,24 @@ const navLinks = [
   { to: "/work" as const, label: "WORK" },
   { to: "/upcoming" as const, label: "UPCOMING" },
   { to: "/team" as const, label: "TEAM" },
-  { to: "/contact" as const, label: "CONTACT" },
 ];
 
 const INSTAGRAM_URL = "https://www.instagram.com/apdsarchitects/";
 
+const contactSubLinks = [
+  { to: "/contact" as const, label: "Contact" },
+  { to: "/opportunities" as const, label: "Opportunities" },
+];
+
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileContactOpen, setMobileContactOpen] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const contactActive = pathname === "/contact" || pathname === "/opportunities";
+
+  const linkClass =
+    "text-xs tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground";
+  const activeClass = "text-foreground";
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm">
@@ -33,13 +44,40 @@ export function Header() {
             <Link
               key={link.to}
               to={link.to}
-              className="nav-link text-xs tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
-              activeProps={{ className: "text-foreground" }}
+              className={linkClass}
+              activeProps={{ className: activeClass }}
               activeOptions={{ exact: link.to === "/" }}
             >
               {link.label}
             </Link>
           ))}
+
+          {/* Contact dropdown */}
+          <div className="group relative flex items-center">
+            <Link
+              to="/contact"
+              className={`${linkClass} ${contactActive ? activeClass : ""}`}
+            >
+              CONTACT
+            </Link>
+            <ChevronDown className="ml-1 h-3 w-3 text-muted-foreground transition-transform group-hover:rotate-180" strokeWidth={1.5} />
+            <div className="absolute top-full left-1/2 min-w-[10rem] -translate-x-1/2 pt-2 opacity-0 invisible transition-all duration-200 group-hover:opacity-100 group-hover:visible">
+              <div className="border border-border bg-background/95 backdrop-blur-sm shadow-sm">
+                {contactSubLinks.map((sub) => (
+                  <Link
+                    key={sub.to}
+                    to={sub.to}
+                    className={`block px-5 py-3 text-xs tracking-[0.18em] transition-colors hover:text-accent hover:bg-secondary/40 ${
+                      pathname === sub.to ? "text-foreground" : "text-muted-foreground"
+                    }`}
+                  >
+                    {sub.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
           <a
             href={INSTAGRAM_URL}
             target="_blank"
@@ -75,6 +113,33 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
+
+            <div className="border-t border-border pt-3">
+              <button
+                className="flex w-full items-center justify-between text-sm tracking-[0.2em] text-muted-foreground"
+                onClick={() => setMobileContactOpen(!mobileContactOpen)}
+              >
+                <span className={contactActive ? "text-foreground" : ""}>CONTACT</span>
+                <ChevronDown className={`h-4 w-4 transition-transform ${mobileContactOpen ? "rotate-180" : ""}`} strokeWidth={1.5} />
+              </button>
+              {mobileContactOpen && (
+                <div className="mt-3 flex flex-col gap-3 pl-3">
+                  {contactSubLinks.map((sub) => (
+                    <Link
+                      key={sub.to}
+                      to={sub.to}
+                      className={`text-sm tracking-[0.18em] transition-colors hover:text-foreground ${
+                        pathname === sub.to ? "text-foreground" : "text-muted-foreground"
+                      }`}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {sub.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
             <a
               href={INSTAGRAM_URL}
               target="_blank"
