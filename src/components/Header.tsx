@@ -30,7 +30,7 @@ export function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-7xl flex-col items-center px-6 py-4 lg:px-12">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-12">
         <Link to="/" className="flex items-center">
           <img
             src={apdsLogo.url}
@@ -39,7 +39,7 @@ export function Header() {
           />
         </Link>
 
-        <nav className="mt-3 hidden items-center justify-center gap-8 md:flex">
+        <nav className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.to}
@@ -61,7 +61,7 @@ export function Header() {
               CONTACT
             </Link>
             <ChevronDown className="ml-1 h-3 w-3 text-muted-foreground transition-transform group-hover:rotate-180" strokeWidth={1.5} />
-            <div className="absolute top-full left-1/2 min-w-[10rem] -translate-x-1/2 pt-2 opacity-0 invisible transition-all duration-200 group-hover:opacity-100 group-hover:visible">
+            <div className="absolute top-full right-0 min-w-[10rem] pt-2 opacity-0 invisible transition-all duration-200 group-hover:opacity-100 group-hover:visible">
               <div className="border border-border bg-background/95 backdrop-blur-sm shadow-sm">
                 {contactSubLinks.map((sub) => (
                   <Link
@@ -89,7 +89,7 @@ export function Header() {
           </a>
         </nav>
 
-        <button className="absolute right-6 top-4 md:hidden" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
+        <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
           <div className="flex flex-col gap-1.5">
             <span className={`block h-px w-6 bg-foreground transition-all ${mobileOpen ? "translate-y-[3.5px] rotate-45" : ""}`} />
             <span className={`block h-px w-6 bg-foreground transition-all ${mobileOpen ? "opacity-0" : ""}`} />
