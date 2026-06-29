@@ -51,17 +51,18 @@ function WorkPage() {
   return (
     <div className="pt-32">
       {/* Editorial header */}
-      <section className="mx-auto max-w-7xl px-6 pt-16 pb-12 lg:px-12 lg:pt-24 lg:pb-16">
+      <section className="mx-auto max-w-7xl px-6 pt-16 pb-12 text-center lg:px-12 lg:pt-24 lg:pb-16">
         <Reveal>
           <h1 className="text-4xl font-extralight tracking-tight text-foreground md:text-5xl">
             Our <span className="text-accent">Work</span>
           </h1>
-          <div className="mt-6 flex items-center gap-3">
+          <div className="mt-6 flex items-center justify-center gap-3">
             <div className="h-px w-16 bg-accent" />
             <div className="h-1.5 w-1.5 rotate-45 border border-accent" />
           </div>
         </Reveal>
       </section>
+
 
 
       {/* Filters */}

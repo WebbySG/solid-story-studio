@@ -47,18 +47,19 @@ const upcoming: UpcomingProject[] = [];
 function UpcomingPage() {
   return (
     <div className="pt-32">
-      <section className="mx-auto max-w-7xl px-6 py-16 lg:px-12 lg:py-24">
+      <section className="mx-auto max-w-7xl px-6 py-16 text-center lg:px-12 lg:py-24">
         <Reveal>
           <p className="text-xs tracking-[0.3em] text-accent">IN PROGRESS</p>
           <h1 className="mt-4 text-3xl font-extralight text-foreground md:text-5xl">
             Upcoming <span className="text-accent">Projects</span>
           </h1>
-          <div className="mt-6 flex items-center gap-3">
+          <div className="mt-6 flex items-center justify-center gap-3">
             <div className="h-px w-16 bg-accent" />
             <div className="h-1.5 w-1.5 rotate-45 border border-accent" />
           </div>
         </Reveal>
       </section>
+
 
       <section className="mx-auto max-w-7xl px-6 pb-24 lg:px-12 lg:pb-32">
         {upcoming.length > 0 ? (
