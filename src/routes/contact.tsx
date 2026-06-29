@@ -56,7 +56,7 @@ function ContactPage() {
         </section>
       </RevealSection>
 
-      <section className="mx-auto max-w-7xl px-6 pb-24 lg:px-12 lg:pb-28">
+      <section className="mx-auto max-w-7xl px-6 pb-20 lg:px-12 lg:pb-24">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <RevealSection>
             <div className="grid gap-8 border-t border-border pt-8 sm:grid-cols-2">
@@ -64,7 +64,7 @@ function ContactPage() {
                 <p className="text-[10px] tracking-[0.22em] text-muted-foreground">ADDRESS</p>
                 <p className="mt-3 text-base font-light leading-relaxed text-foreground">
                   118 Joo Chiat Road #02-01 <br />
-                  427407
+                  Singapore 427407
                 </p>
               </div>
               <div>
@@ -101,6 +101,54 @@ function ContactPage() {
           </RevealSection>
         </div>
       </section>
+
+      {/* Google Map */}
+      <RevealSection>
+        <section className="mx-auto max-w-7xl px-6 pb-20 lg:px-12 lg:pb-24">
+          <p className="text-[10px] tracking-[0.22em] text-muted-foreground">LOCATION</p>
+          <div className="mt-4 aspect-[16/9] w-full overflow-hidden border border-border bg-secondary">
+            <iframe
+              title="APdS Architects on Google Maps"
+              src="https://www.google.com/maps?q=118+Joo+Chiat+Road+%2302-01+Singapore+427407&output=embed"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="h-full w-full border-0 grayscale"
+            />
+          </div>
+        </section>
+      </RevealSection>
+
+      {/* Opportunities */}
+      <RevealSection>
+        <section className="border-t border-border bg-secondary/30">
+          <div className="mx-auto max-w-7xl px-6 py-20 lg:px-12 lg:py-28">
+            <div className="grid gap-12 md:grid-cols-12">
+              <div className="md:col-span-4">
+                <p className="text-xs tracking-[0.3em] text-accent">OPPORTUNITIES</p>
+                <h2 className="mt-4 text-2xl font-extralight text-foreground md:text-3xl">
+                  Join the <span className="text-accent">studio</span>
+                </h2>
+                <div className="mt-6 flex items-center gap-3">
+                  <div className="h-px w-12 bg-accent" />
+                  <div className="h-1.5 w-1.5 rotate-45 border border-accent" />
+                </div>
+              </div>
+              <div className="space-y-5 text-sm leading-relaxed text-muted-foreground md:col-span-8 md:text-base">
+                <p>
+                  We are always on the lookout for talented, creative, and driven individuals to join our team.
+                </p>
+                <p>
+                  Interested applicants may submit their portfolio and CV to{" "}
+                  <a href="mailto:apds@apdsarchitects.com" className="text-foreground underline underline-offset-4 transition-colors hover:text-accent">
+                    apds@apdsarchitects.com
+                  </a>{" "}
+                  for internship or full-time opportunities.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </RevealSection>
     </div>
   );
 }

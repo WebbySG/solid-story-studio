@@ -321,8 +321,8 @@ function AboutPage() {
           <div className="absolute top-0 left-[80%] h-full w-px bg-copper/15" />
           <div className="mx-auto grid max-w-5xl gap-10 px-6 text-center md:grid-cols-4">
             {[
-              { number: "15+", label: "Years Experience" },
-              { number: "120+", label: "Projects Completed" },
+              { number: "20+", label: "Years Experience" },
+              { number: "188+", label: "Projects Completed" },
               { number: "25+", label: "Awards Won" },
               { number: "18", label: "Team Members" },
             ].map((stat) => (
