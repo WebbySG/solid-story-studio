@@ -23,7 +23,7 @@ export function Header() {
         <Link to="/" className="flex items-center">
           <img
             src={apdsLogo.url}
-            alt="APdS Architects — Architectural · Interior · Landscape"
+            alt="APdS Architects"
             className="h-7 w-auto object-contain md:h-12"
           />
         </Link>
