@@ -128,7 +128,7 @@ function AboutPage() {
               </div>
             </div>
             <div className="lg:col-span-5 lg:pl-4">
-              <span className="text-xs tracking-[0.3em] text-accent">EST. 2009</span>
+              <span className="text-xs tracking-[0.3em] text-accent">EST. 2005</span>
               <h2 className="mt-4 text-2xl font-extralight text-foreground md:text-3xl">Our Practice</h2>
               <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
                 APdS Architects is a design-driven architectural practice combining creativity and collaborative teamwork to deliver contemporary solutions. Founded on the belief that great architecture emerges from a deep understanding of context, our studio brings together diverse expertise to create spaces that are meaningful, sustainable, and enduring.
@@ -182,7 +182,7 @@ function AboutPage() {
 
                   <div className="mt-8">
                     <p className="text-[10px] tracking-[0.3em] text-accent">BACKGROUND</p>
-                    <div className="mt-4 space-y-4 text-sm leading-relaxed text-muted-foreground">
+                    <div className="mt-4 space-y-4 text-sm leading-relaxed text-muted-foreground text-justify">
                       {leader.background.map((p, idx) => (
                         <p key={idx}>{p}</p>
                       ))}
