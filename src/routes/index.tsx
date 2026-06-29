@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { projects } from "@/data/projects";
+import apdsLogoHero from "@/assets/2026-latest-apds-logo-light.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,9 +29,11 @@ function HomePage() {
       <div className="hero-overlay absolute inset-0" />
       <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
         <div className="mb-6 h-px w-12 bg-copper-light/60" />
-        <h1 className="animate-fade-in-up text-4xl font-extralight tracking-[0.12em] text-off-white md:text-6xl lg:text-7xl">
-          APdS Architects
-        </h1>
+        <img
+          src={apdsLogoHero.url}
+          alt="APdS Architects"
+          className="animate-fade-in-up h-auto w-full max-w-sm md:max-w-md lg:max-w-lg"
+        />
         <p className="animate-fade-in-up animation-delay-200 mt-6 max-w-2xl text-sm font-light leading-relaxed tracking-wider text-off-white/80">
           Architectural and interior design practice shaping calm, contemporary spaces with clarity, light, and a strong connection to site.
         </p>
