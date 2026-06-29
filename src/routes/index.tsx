@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { projects } from "@/data/projects";
-import apdsLogo from "@/assets/2026-latest-apds-logo.png.asset.json";
+import apdsLogoHero from "@/assets/2026-latest-apds-logo-light.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
