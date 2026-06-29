@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UpcomingRouteImport } from './routes/upcoming'
 import { Route as TeamRouteImport } from './routes/team'
+import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -25,6 +26,11 @@ const UpcomingRoute = UpcomingRouteImport.update({
 const TeamRoute = TeamRouteImport.update({
   id: '/team',
   path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OpportunitiesRoute = OpportunitiesRouteImport.update({
+  id: '/opportunities',
+  path: '/opportunities',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/opportunities': typeof OpportunitiesRoute
   '/team': typeof TeamRoute
   '/upcoming': typeof UpcomingRoute
   '/work/$slug': typeof WorkSlugRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/opportunities': typeof OpportunitiesRoute
   '/team': typeof TeamRoute
   '/upcoming': typeof UpcomingRoute
   '/work/$slug': typeof WorkSlugRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/opportunities': typeof OpportunitiesRoute
   '/team': typeof TeamRoute
   '/upcoming': typeof UpcomingRoute
   '/work/$slug': typeof WorkSlugRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/opportunities'
     | '/team'
     | '/upcoming'
     | '/work/$slug'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/opportunities'
     | '/team'
     | '/upcoming'
     | '/work/$slug'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/opportunities'
     | '/team'
     | '/upcoming'
     | '/work/$slug'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
+  OpportunitiesRoute: typeof OpportunitiesRoute
   TeamRoute: typeof TeamRoute
   UpcomingRoute: typeof UpcomingRoute
   WorkSlugRoute: typeof WorkSlugRoute
@@ -135,6 +148,13 @@ declare module '@tanstack/react-router' {
       path: '/team'
       fullPath: '/team'
       preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/opportunities': {
+      id: '/opportunities'
+      path: '/opportunities'
+      fullPath: '/opportunities'
+      preLoaderRoute: typeof OpportunitiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -179,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
+  OpportunitiesRoute: OpportunitiesRoute,
   TeamRoute: TeamRoute,
   UpcomingRoute: UpcomingRoute,
   WorkSlugRoute: WorkSlugRoute,

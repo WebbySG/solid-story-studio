@@ -153,12 +153,12 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
               if (dragState.current?.moved) { e.preventDefault(); return; }
               handleSelect(i);
             }}
-            className={`group relative aspect-[4/3] flex-shrink-0 basis-[calc((100%-2.25rem)/4)] overflow-hidden border-2 transition ${i === index ? "border-accent ring-2 ring-accent/40" : "border-transparent hover:border-accent/60"}`}
+            className={`group relative h-28 md:h-36 flex-shrink-0 overflow-hidden border-2 transition ${i === index ? "border-accent ring-2 ring-accent/40" : "border-transparent hover:border-accent/60"}`}
           >
             <img
               src={src}
               alt={`${title} — thumbnail ${i + 1}`}
-              className="pointer-events-none h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              className="pointer-events-none h-full w-auto object-contain transition-transform duration-500 group-hover:scale-[1.03]"
               loading="lazy"
               draggable={false}
               width={400}
