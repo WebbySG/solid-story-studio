@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Instagram } from "lucide-react";
-import apdsLogo from "@/assets/apds-logo-aligned.png.asset.json";
+import apdsLogo from "@/assets/2026-latest-apds-logo.png.asset.json";
 
 const navLinks = [
   { to: "/" as const, label: "HOME" },
@@ -23,7 +23,7 @@ export function Header() {
         <Link to="/" className="flex items-center">
           <img
             src={apdsLogo.url}
-            alt="APdS Architects — Architectural · Interior · Landscape"
+            alt="APdS Architects"
             className="h-7 w-auto object-contain md:h-12"
           />
         </Link>
