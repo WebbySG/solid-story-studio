@@ -30,7 +30,7 @@ function HomePage() {
       <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
         <div className="mb-6 h-px w-12 bg-copper-light/60" />
         <img
-          src={apdsLogo.url}
+          src={apdsLogoHero.url}
           alt="APdS Architects"
           className="animate-fade-in-up h-auto w-full max-w-sm md:max-w-md lg:max-w-lg"
         />
