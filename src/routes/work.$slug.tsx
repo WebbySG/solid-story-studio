@@ -180,7 +180,7 @@ function ProjectPage() {
   const carouselImages = [project.image, ...project.gallery.filter((g) => g !== project.image)];
 
   return (
-    <div className="pt-20">
+    <div className="pt-32">
       <section className="mx-auto max-w-7xl px-6 pt-8 pb-8 lg:px-12 lg:pt-12">
         <Reveal>
           <p className="text-xs tracking-[0.3em] text-accent">

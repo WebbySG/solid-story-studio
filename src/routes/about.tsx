@@ -101,21 +101,22 @@ const values = [
 
 function AboutPage() {
   return (
-    <div className="pt-20">
+    <div className="pt-32">
       {/* Hero */}
       <RevealSection>
-        <section className="mx-auto max-w-7xl px-6 py-16 lg:px-12 lg:py-24">
+        <section className="mx-auto max-w-7xl px-6 py-16 text-center lg:px-12 lg:py-24">
           <p className="text-xs tracking-[0.3em] text-accent">ABOUT US</p>
-          <h1 className="mt-4 max-w-2xl text-3xl font-extralight leading-snug text-foreground md:text-5xl">
+          <h1 className="mx-auto mt-4 max-w-2xl text-3xl font-extralight leading-snug text-foreground md:text-5xl">
             Architecture shaped by<br />
             <span className="text-accent">people</span> and <span className="text-accent">place</span>
           </h1>
-          <div className="mt-8 flex items-center gap-3">
+          <div className="mt-8 flex items-center justify-center gap-3">
             <div className="h-px w-16 bg-accent" />
             <div className="h-1.5 w-1.5 rotate-45 border border-accent" />
           </div>
         </section>
       </RevealSection>
+
 
       {/* Image + text — asymmetric */}
       <RevealSection>
