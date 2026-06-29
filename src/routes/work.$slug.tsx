@@ -120,12 +120,12 @@ function Carousel({ images, title }: { images: string[]; title: string }) {
 
   return (
     <div className="w-full">
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-secondary md:aspect-[16/8]">
+      <div className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden bg-secondary md:aspect-[16/9]">
         <img
           key={images[index]}
           src={images[index]}
           alt={`${title} — featured view ${index + 1}`}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-contain"
           loading="eager"
           width={2200}
           height={1400}
@@ -183,12 +183,12 @@ function ProjectPage() {
     <div className="pt-20">
       <section className="mx-auto max-w-7xl px-6 pt-8 pb-8 lg:px-12 lg:pt-12">
         <Reveal>
-          <p className="text-sm tracking-[0.3em] text-accent">
+          <p className="text-xs tracking-[0.3em] text-accent">
             {project.discipline.toUpperCase()} · {project.category.toUpperCase()}
           </p>
-          <h1 className="mt-4 text-5xl font-extralight text-foreground md:text-6xl lg:text-7xl">{project.title}</h1>
-          <div className="mt-6 flex items-center gap-3">
-            <div className="h-px w-40 bg-accent md:w-56" />
+          <h1 className="mt-3 text-2xl font-extralight text-foreground md:text-3xl lg:text-[2.25rem]">{project.title}</h1>
+          <div className="mt-5 flex items-center gap-3">
+            <div className="h-px w-24 bg-accent md:w-32" />
             <div className="h-1.5 w-1.5 rotate-45 border border-accent" />
           </div>
         </Reveal>
@@ -236,14 +236,6 @@ function ProjectPage() {
               ))}
             </div>
 
-            <div className="mt-12 grid grid-cols-2 gap-6 border-t border-border pt-8">
-              {project.facts.map((f) => (
-                <div key={f.label}>
-                  <p className="text-xs tracking-[0.2em] text-muted-foreground">{f.label.toUpperCase()}</p>
-                  <p className="mt-1.5 text-base font-light text-foreground">{f.value}</p>
-                </div>
-              ))}
-            </div>
           </Reveal>
         </div>
       </section>

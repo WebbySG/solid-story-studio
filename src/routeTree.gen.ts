@@ -9,23 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UpcomingRouteImport } from './routes/upcoming'
 import { Route as TeamRouteImport } from './routes/team'
-import { Route as MediaRouteImport } from './routes/media'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WorkIndexRouteImport } from './routes/work.index'
 import { Route as WorkSlugRouteImport } from './routes/work.$slug'
-import { Route as MediaSlugRouteImport } from './routes/media.$slug'
 
+const UpcomingRoute = UpcomingRouteImport.update({
+  id: '/upcoming',
+  path: '/upcoming',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TeamRoute = TeamRouteImport.update({
   id: '/team',
   path: '/team',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MediaRoute = MediaRouteImport.update({
-  id: '/media',
-  path: '/media',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -53,19 +52,13 @@ const WorkSlugRoute = WorkSlugRouteImport.update({
   path: '/work/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MediaSlugRoute = MediaSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => MediaRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/media': typeof MediaRouteWithChildren
   '/team': typeof TeamRoute
-  '/media/$slug': typeof MediaSlugRoute
+  '/upcoming': typeof UpcomingRoute
   '/work/$slug': typeof WorkSlugRoute
   '/work/': typeof WorkIndexRoute
 }
@@ -73,9 +66,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/media': typeof MediaRouteWithChildren
   '/team': typeof TeamRoute
-  '/media/$slug': typeof MediaSlugRoute
+  '/upcoming': typeof UpcomingRoute
   '/work/$slug': typeof WorkSlugRoute
   '/work': typeof WorkIndexRoute
 }
@@ -84,9 +76,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/media': typeof MediaRouteWithChildren
   '/team': typeof TeamRoute
-  '/media/$slug': typeof MediaSlugRoute
+  '/upcoming': typeof UpcomingRoute
   '/work/$slug': typeof WorkSlugRoute
   '/work/': typeof WorkIndexRoute
 }
@@ -96,9 +87,8 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
-    | '/media'
     | '/team'
-    | '/media/$slug'
+    | '/upcoming'
     | '/work/$slug'
     | '/work/'
   fileRoutesByTo: FileRoutesByTo
@@ -106,9 +96,8 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
-    | '/media'
     | '/team'
-    | '/media/$slug'
+    | '/upcoming'
     | '/work/$slug'
     | '/work'
   id:
@@ -116,9 +105,8 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
-    | '/media'
     | '/team'
-    | '/media/$slug'
+    | '/upcoming'
     | '/work/$slug'
     | '/work/'
   fileRoutesById: FileRoutesById
@@ -127,26 +115,26 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
-  MediaRoute: typeof MediaRouteWithChildren
   TeamRoute: typeof TeamRoute
+  UpcomingRoute: typeof UpcomingRoute
   WorkSlugRoute: typeof WorkSlugRoute
   WorkIndexRoute: typeof WorkIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/upcoming': {
+      id: '/upcoming'
+      path: '/upcoming'
+      fullPath: '/upcoming'
+      preLoaderRoute: typeof UpcomingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/team': {
       id: '/team'
       path: '/team'
       fullPath: '/team'
       preLoaderRoute: typeof TeamRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/media': {
-      id: '/media'
-      path: '/media'
-      fullPath: '/media'
-      preLoaderRoute: typeof MediaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -184,44 +172,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/media/$slug': {
-      id: '/media/$slug'
-      path: '/$slug'
-      fullPath: '/media/$slug'
-      preLoaderRoute: typeof MediaSlugRouteImport
-      parentRoute: typeof MediaRoute
-    }
   }
 }
-
-interface MediaRouteChildren {
-  MediaSlugRoute: typeof MediaSlugRoute
-}
-
-const MediaRouteChildren: MediaRouteChildren = {
-  MediaSlugRoute: MediaSlugRoute,
-}
-
-const MediaRouteWithChildren = MediaRoute._addFileChildren(MediaRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
-  MediaRoute: MediaRouteWithChildren,
   TeamRoute: TeamRoute,
+  UpcomingRoute: UpcomingRoute,
   WorkSlugRoute: WorkSlugRoute,
   WorkIndexRoute: WorkIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
