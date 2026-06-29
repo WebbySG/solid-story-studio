@@ -46,7 +46,7 @@ const upcoming: UpcomingProject[] = [];
 
 function UpcomingPage() {
   return (
-    <div className="pt-20">
+    <div className="pt-32">
       <section className="mx-auto max-w-7xl px-6 py-16 lg:px-12 lg:py-24">
         <Reveal>
           <p className="text-xs tracking-[0.3em] text-accent">IN PROGRESS</p>
