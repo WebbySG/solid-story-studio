@@ -30,7 +30,7 @@ export function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-12">
+      <div className="mx-auto flex max-w-7xl flex-col items-center px-6 py-4 lg:px-12">
         <Link to="/" className="flex items-center">
           <img
             src={apdsLogo.url}
@@ -39,7 +39,7 @@ export function Header() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="mt-3 hidden items-center justify-center gap-8 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.to}
@@ -89,7 +89,7 @@ export function Header() {
           </a>
         </nav>
 
-        <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
+        <button className="absolute right-6 top-4 md:hidden" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
           <div className="flex flex-col gap-1.5">
             <span className={`block h-px w-6 bg-foreground transition-all ${mobileOpen ? "translate-y-[3.5px] rotate-45" : ""}`} />
             <span className={`block h-px w-6 bg-foreground transition-all ${mobileOpen ? "opacity-0" : ""}`} />
@@ -97,6 +97,7 @@ export function Header() {
           </div>
         </button>
       </div>
+
 
       {mobileOpen && (
         <nav className="border-t border-border bg-background px-6 py-6 md:hidden">
