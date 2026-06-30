@@ -35,7 +35,7 @@ export function Header() {
           <img
             src={apdsLogo.url}
             alt="APdS Architects"
-            className="h-7 w-auto object-contain md:h-12"
+            className="h-10 w-auto object-contain md:h-12"
           />
         </Link>
 
