@@ -147,7 +147,23 @@ function AboutPage() {
       </RevealSection>
 
       {/* Leadership */}
+      {/* Team gallery */}
+      <RevealSection>
+        <section className="mx-auto max-w-7xl px-6 pt-24 lg:px-12">
+          <div className="grid gap-6 md:grid-cols-12">
+            <div className="md:col-span-7">
+              <img src={teamGroup.url} alt="APdS Architects team portrait" className="w-full object-cover" loading="lazy" />
+            </div>
+            <div className="md:col-span-5">
+              <img src={teamWorking.url} alt="APdS Architects team at work" className="h-full w-full object-cover" loading="lazy" />
+            </div>
+          </div>
+        </section>
+      </RevealSection>
+
+      {/* Leadership */}
       <section className="mx-auto max-w-7xl px-6 py-24 lg:px-12">
+
         <RevealSection>
           <p className="text-xs tracking-[0.3em] text-accent">LEADERSHIP</p>
           <h2 className="mt-4 max-w-xl text-2xl font-extralight text-foreground md:text-3xl">
