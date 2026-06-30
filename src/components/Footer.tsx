@@ -1,10 +1,12 @@
+import logoLightAsset from "@/assets/2026-latest-apds-logo-light.png.asset.json";
+
 export function Footer() {
   return (
     <footer className="border-t border-border bg-primary py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid gap-12 md:grid-cols-3">
           <div>
-            <h3 className="text-sm font-light tracking-[0.25em] text-primary-foreground">APdS ARCHITECTS</h3>
+            <img src={logoLightAsset.url} alt="APdS Architects" className="h-8 w-auto" />
             <p className="mt-4 max-w-sm text-xs leading-relaxed text-primary-foreground/60">
               Architectural and interior design practice crafting thoughtful spaces with clarity, material warmth, and strong responses to site.
             </p>
@@ -13,7 +15,7 @@ export function Footer() {
           <div>
             <h4 className="text-xs tracking-[0.2em] text-primary-foreground/40">CONTACT</h4>
             <div className="mt-4 flex flex-col gap-2 text-xs text-primary-foreground/60">
-              <p>118 Joo Chiat Road #02-01, 427407</p>
+              <p>118 Joo Chiat Road #02-01, Singapore 427407</p>
               <p>+65 6288 1618</p>
               <p>WhatsApp: +65 9072 1618</p>
               <p>apds@apdsarchitects.com</p>
