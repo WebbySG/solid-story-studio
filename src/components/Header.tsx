@@ -100,13 +100,13 @@ export function Header() {
 
 
       {mobileOpen && (
-        <nav className="border-t border-border bg-background px-6 py-6 md:hidden">
-          <div className="flex flex-col gap-4">
+        <div className="fixed inset-0 top-0 z-40 bg-background md:hidden">
+          <nav className="flex h-full flex-col gap-6 overflow-y-auto px-6 pt-24 pb-8">
             {navLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
-                className="text-sm tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
+                className="text-base tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
                 activeProps={{ className: "text-foreground" }}
                 activeOptions={{ exact: link.to === "/" }}
                 onClick={() => setMobileOpen(false)}
@@ -115,16 +115,16 @@ export function Header() {
               </Link>
             ))}
 
-            <div className="border-t border-border pt-3">
+            <div className="border-t border-border pt-4">
               <button
-                className="flex w-full items-center justify-between text-sm tracking-[0.2em] text-muted-foreground"
+                className="flex w-full items-center justify-between text-base tracking-[0.2em] text-muted-foreground"
                 onClick={() => setMobileContactOpen(!mobileContactOpen)}
               >
                 <span className={contactActive ? "text-foreground" : ""}>CONTACT</span>
                 <ChevronDown className={`h-4 w-4 transition-transform ${mobileContactOpen ? "rotate-180" : ""}`} strokeWidth={1.5} />
               </button>
               {mobileContactOpen && (
-                <div className="mt-3 flex flex-col gap-3 pl-3">
+                <div className="mt-4 flex flex-col gap-4 pl-3">
                   {contactSubLinks.map((sub) => (
                     <Link
                       key={sub.to}
@@ -145,14 +145,14 @@ export function Header() {
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 text-sm tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
+              className="flex items-center gap-2 text-base tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
               onClick={() => setMobileOpen(false)}
             >
-              <Instagram className="h-4 w-4" strokeWidth={1.25} />
+              <Instagram className="h-5 w-5" strokeWidth={1.25} />
               INSTAGRAM
             </a>
-          </div>
-        </nav>
+          </nav>
+        </div>
       )}
     </header>
   );
