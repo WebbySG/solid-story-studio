@@ -135,7 +135,6 @@ export const projects: Project[] = [
       { label: "Category", value: "Commercial" },
     ],
   },
-];
 
   {
     slug: "legend-restaurant",
