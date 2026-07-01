@@ -20,6 +20,11 @@ import ourBar2 from "@/assets/our-bar-2-2.png.asset.json";
 import ourBar3 from "@/assets/our-bar-3-2.png.asset.json";
 import ourBar4 from "@/assets/our-bar-4.png.asset.json";
 import ourBar5 from "@/assets/our-bar-5.png.asset.json";
+import park100 from "@/assets/park-10-0-icon_1.png.asset.json";
+import park102 from "@/assets/park-10-2_1.png.asset.json";
+import park103 from "@/assets/park-10-3_1.png.asset.json";
+import park104 from "@/assets/park-10-4_1.png.asset.json";
+import park105 from "@/assets/park-10-5_1.png.asset.json";
 
 export type ProjectDiscipline = "Architectural" | "Interior Design";
 export type ProjectCategory = "Residential" | "Commercial" | "Institutional";
@@ -99,6 +104,26 @@ export const projects: Project[] = [
     facts: [
       { label: "Location", value: "Singapore" },
       { label: "Client", value: "Our Bar" },
+      { label: "Discipline", value: "Interior Design" },
+      { label: "Category", value: "Commercial" },
+    ],
+  },
+  {
+    slug: "park-10",
+    image: park100.url,
+    title: "Park 10",
+    discipline: "Interior Design",
+    category: "Commercial",
+    location: "Singapore",
+    client: "Park 10",
+    description: [
+      "This Japanese izakaya restaurant is designed around a contrast between energetic communal spaces and calm private dining rooms. Red and dark timber define the bar and public areas, while tatami and light wood finishes create a more intimate, homely atmosphere in the private rooms.",
+      "At the centre, a custom BBQ pit invites guests to grill their own yakitori, adding an interactive dining experience. The entrance is expressed as a glass box, while architectural screens filter natural light into the space. Layered textures and soft indirect lighting complete the warm, inviting interior.",
+    ],
+    gallery: [park100.url, park102.url, park103.url, park104.url, park105.url],
+    facts: [
+      { label: "Location", value: "Singapore" },
+      { label: "Client", value: "Park 10" },
       { label: "Discipline", value: "Interior Design" },
       { label: "Category", value: "Commercial" },
     ],
