@@ -83,6 +83,26 @@ export const projects: Project[] = [
       { label: "Design Focus", value: "Light, greenery, and outdoor living" },
     ],
   },
+  {
+    slug: "our-bar",
+    image: ourBar0.url,
+    title: "Our Bar",
+    discipline: "Interior Design",
+    category: "Commercial",
+    location: "Singapore",
+    client: "Our Bar",
+    description: [
+      "A small bar interior defined by a clean, understated design. A softly lit motif backdrop frames the wine shelving, while indirect lighting highlights the bar counter and ceiling.",
+      "The result is a warm, intimate atmosphere that keeps focus on the wine display and overall ambience.",
+    ],
+    gallery: [ourBar0.url, ourBar2.url, ourBar4.url, ourBar5.url, ourBar3.url],
+    facts: [
+      { label: "Location", value: "Singapore" },
+      { label: "Client", value: "Our Bar" },
+      { label: "Discipline", value: "Interior Design" },
+      { label: "Category", value: "Commercial" },
+    ],
+  },
 ];
 
 export function getProject(slug: string) {
