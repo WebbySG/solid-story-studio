@@ -32,6 +32,12 @@ import legend4 from "@/assets/legend-4.png.asset.json";
 import legend5 from "@/assets/legend-5.png.asset.json";
 import legend6 from "@/assets/legend-6.png.asset.json";
 import legend7 from "@/assets/legend-7.png.asset.json";
+import legendDsc7995 from "@/assets/DSC_7995.png.asset.json";
+import legendDsc7997 from "@/assets/DSC_7997.png.asset.json";
+import legendDsc8006 from "@/assets/DSC_8006.png.asset.json";
+import legendDsc8011 from "@/assets/DSC_8011.png.asset.json";
+import legendDsc8014 from "@/assets/DSC_8014.png.asset.json";
+import legendDsc8021 from "@/assets/DSC_8021.png.asset.json";
 
 export type ProjectDiscipline = "Architectural" | "Interior Design";
 export type ProjectCategory = "Residential" | "Commercial" | "Institutional";
