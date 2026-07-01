@@ -80,16 +80,9 @@ function UpcomingPage() {
                       className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05]"
                     />
                   </div>
-                  {(p.title || p.category) && (
-                    <figcaption className="border-t border-border bg-background px-5 py-4">
-                      {p.category ? (
-                        <p className="text-[10px] tracking-[0.25em] text-accent">{p.category.toUpperCase()}</p>
-                      ) : null}
-                      {p.title ? (
-                        <h2 className="mt-1.5 text-lg font-light text-foreground">{p.title}</h2>
-                      ) : null}
-                    </figcaption>
-                  )}
+                  <figcaption className="border-t border-border bg-background px-5 py-4">
+                    <h2 className="text-lg font-light tracking-[0.15em] text-foreground">{p.title.toUpperCase()}</h2>
+                  </figcaption>
                 </figure>
               </Reveal>
             ))}
