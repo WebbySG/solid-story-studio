@@ -25,6 +25,13 @@ import park102 from "@/assets/park-10-2_1.png.asset.json";
 import park103 from "@/assets/park-10-3_1.png.asset.json";
 import park104 from "@/assets/park-10-4_1.png.asset.json";
 import park105 from "@/assets/park-10-5_1.png.asset.json";
+import legendIcon from "@/assets/legend-icon.png.asset.json";
+import legend2 from "@/assets/legend-2.png.asset.json";
+import legend3 from "@/assets/legend-3.png.asset.json";
+import legend4 from "@/assets/legend-4.png.asset.json";
+import legend5 from "@/assets/legend-5.png.asset.json";
+import legend6 from "@/assets/legend-6.png.asset.json";
+import legend7 from "@/assets/legend-7.png.asset.json";
 
 export type ProjectDiscipline = "Architectural" | "Interior Design";
 export type ProjectCategory = "Residential" | "Commercial" | "Institutional";
@@ -124,6 +131,28 @@ export const projects: Project[] = [
     facts: [
       { label: "Location", value: "Singapore" },
       { label: "Client", value: "Park 10" },
+      { label: "Discipline", value: "Interior Design" },
+      { label: "Category", value: "Commercial" },
+    ],
+  },
+
+  {
+    slug: "legend-restaurant",
+    image: legendIcon.url,
+    title: "Legend Restaurant",
+    discipline: "Interior Design",
+    category: "Commercial",
+    location: "Singapore",
+    client: "Legend",
+    description: [
+      "Legend Restaurant at CIMB Plaza is a nostalgic dining concept designed in collaboration with ex-Singapore MasterChef finalist Aaron Wong. Inspired by Singapore's 1980s street food culture, the interior recreates the warmth and charm of old coffee shops, hawker stalls, and night markets.",
+      "Orange paper lanterns, timber finishes, clay roof tiles, exposed bulbs, vintage signage, and a pushcart-style counter come together to create an immersive old-school atmosphere. The simple tables and stools reflect the casual, communal spirit of local dining, while the warm lighting and rustic details bring a sense of familiarity and memory.",
+      "The result is a lively and character-filled restaurant that celebrates Singapore's food heritage, where design and cuisine work together to offer diners a nostalgic yet memorable experience.",
+    ],
+    gallery: [legendIcon.url, legend2.url, legend3.url, legend4.url, legend5.url, legend6.url, legend7.url],
+    facts: [
+      { label: "Location", value: "Singapore" },
+      { label: "Client", value: "Legend" },
       { label: "Discipline", value: "Interior Design" },
       { label: "Category", value: "Commercial" },
     ],
