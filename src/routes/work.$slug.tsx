@@ -181,7 +181,18 @@ function ProjectPage() {
 
   return (
     <div className="pt-32">
-      <section className="mx-auto max-w-7xl px-6 pt-8 pb-8 lg:px-12 lg:pt-12">
+      <section className="mx-auto max-w-7xl px-6 pt-8 pb-4 lg:px-12 lg:pt-12">
+        <Reveal>
+          <Link
+            to="/work"
+            className="hidden md:inline-flex items-center gap-3 text-xs tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
+          >
+            ← BACK TO WORK
+          </Link>
+        </Reveal>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 pb-8 lg:px-12">
         <Reveal>
           <p className="text-xs tracking-[0.3em] text-accent">
             {project.discipline.toUpperCase()} · {project.category.toUpperCase()}
