@@ -15,6 +15,11 @@ import jalanParas7976 from "@/assets/jalan-paras-7976.png.asset.json";
 import jalanParas7981 from "@/assets/jalan-paras-7981.png.asset.json";
 import jalanParas7986 from "@/assets/jalan-paras-7986.png.asset.json";
 import jalanParas7987 from "@/assets/jalan-paras-7987.png.asset.json";
+import ourBar0 from "@/assets/our-bar-0-icon.png.asset.json";
+import ourBar2 from "@/assets/our-bar-2-2.png.asset.json";
+import ourBar3 from "@/assets/our-bar-3-2.png.asset.json";
+import ourBar4 from "@/assets/our-bar-4.png.asset.json";
+import ourBar5 from "@/assets/our-bar-5.png.asset.json";
 
 export type ProjectDiscipline = "Architectural" | "Interior Design";
 export type ProjectCategory = "Residential" | "Commercial" | "Institutional";
@@ -76,6 +81,26 @@ export const projects: Project[] = [
       { label: "Discipline", value: "Architectural" },
       { label: "Site Response", value: "Highly triangular plot" },
       { label: "Design Focus", value: "Light, greenery, and outdoor living" },
+    ],
+  },
+  {
+    slug: "our-bar",
+    image: ourBar0.url,
+    title: "Our Bar",
+    discipline: "Interior Design",
+    category: "Commercial",
+    location: "Singapore",
+    client: "Our Bar",
+    description: [
+      "A small bar interior defined by a clean, understated design. A softly lit motif backdrop frames the wine shelving, while indirect lighting highlights the bar counter and ceiling.",
+      "The result is a warm, intimate atmosphere that keeps focus on the wine display and overall ambience.",
+    ],
+    gallery: [ourBar0.url, ourBar2.url, ourBar4.url, ourBar5.url, ourBar3.url],
+    facts: [
+      { label: "Location", value: "Singapore" },
+      { label: "Client", value: "Our Bar" },
+      { label: "Discipline", value: "Interior Design" },
+      { label: "Category", value: "Commercial" },
     ],
   },
 ];
