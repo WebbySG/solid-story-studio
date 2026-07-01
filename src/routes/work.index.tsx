@@ -43,8 +43,7 @@ function WorkPage() {
   const filtered = useMemo(() => {
     return projects.filter((project) => {
       if (project.discipline !== discipline) return false;
-      if (discipline === "Architectural") return project.category === category;
-      return true;
+      return project.category === category;
     });
   }, [discipline, category]);
 
