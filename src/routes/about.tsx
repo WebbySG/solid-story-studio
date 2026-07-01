@@ -336,14 +336,17 @@ function AboutPage() {
       {/* Stats */}
       <RevealSection>
         <section className="bg-primary py-20">
-          <div className="mx-auto grid max-w-5xl grid-cols-2 divide-x divide-copper/15 px-6 text-center md:grid-cols-4">
+          <div className="mx-auto grid max-w-5xl grid-cols-2 px-6 text-center md:grid-cols-4">
             {[
               { number: "20+", label: "Years Experience" },
               { number: "188+", label: "Projects Completed" },
               { number: "25+", label: "Awards Won" },
               { number: "18", label: "Team Members" },
             ].map((stat, i) => (
-              <div key={stat.label} className={`group px-6 py-8 ${i === 0 ? "md:border-l md:border-copper/15" : ""} ${i === 1 ? "border-l md:border-l-0" : ""} ${i === 3 ? "border-l md:border-r md:border-copper/15" : ""} ${i === 2 ? "md:border-l md:border-copper/15" : ""}`}>
+              <div
+                key={stat.label}
+                className={`group px-6 py-10 ${i > 0 ? "border-l border-copper/15" : ""} ${i > 1 ? "border-t border-copper/15 md:border-t-0" : ""}`}
+              >
                 <p className="text-4xl font-extralight text-accent transition-transform group-hover:scale-110">{stat.number}</p>
                 <p className="mt-3 text-xs tracking-[0.15em] text-primary-foreground/50">{stat.label.toUpperCase()}</p>
               </div>
