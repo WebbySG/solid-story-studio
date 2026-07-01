@@ -25,6 +25,13 @@ import park102 from "@/assets/park-10-2_1.png.asset.json";
 import park103 from "@/assets/park-10-3_1.png.asset.json";
 import park104 from "@/assets/park-10-4_1.png.asset.json";
 import park105 from "@/assets/park-10-5_1.png.asset.json";
+import legendIcon from "@/assets/legend-icon.png.asset.json";
+import legend2 from "@/assets/legend-2.png.asset.json";
+import legend3 from "@/assets/legend-3.png.asset.json";
+import legend4 from "@/assets/legend-4.png.asset.json";
+import legend5 from "@/assets/legend-5.png.asset.json";
+import legend6 from "@/assets/legend-6.png.asset.json";
+import legend7 from "@/assets/legend-7.png.asset.json";
 
 export type ProjectDiscipline = "Architectural" | "Interior Design";
 export type ProjectCategory = "Residential" | "Commercial" | "Institutional";
