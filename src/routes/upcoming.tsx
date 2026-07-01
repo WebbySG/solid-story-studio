@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
+import koonSeng from "@/assets/koon-seng-road.png.asset.json";
+import lavender from "@/assets/lavender-street.png.asset.json";
+import mountbatten from "@/assets/mountbatten-road.png.asset.json";
 
 export const Route = createFileRoute("/upcoming")({
   head: () => ({
@@ -35,14 +38,16 @@ function Reveal({ children, className = "" }: { children: React.ReactNode; class
   return <div ref={ref} className={`reveal-on-scroll ${className}`}>{children}</div>;
 }
 
-// Upcoming projects — populate as project images are received.
 type UpcomingProject = {
-  title?: string;
-  category?: string;
+  title: string;
   image: string;
 };
 
-const upcoming: UpcomingProject[] = [];
+const upcoming: UpcomingProject[] = [
+  { title: "Koon Seng Road", image: koonSeng.url },
+  { title: "Lavender Street", image: lavender.url },
+  { title: "Mountbatten Road", image: mountbatten.url },
+];
 
 function UpcomingPage() {
   return (
@@ -75,16 +80,9 @@ function UpcomingPage() {
                       className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05]"
                     />
                   </div>
-                  {(p.title || p.category) && (
-                    <figcaption className="border-t border-border bg-background px-5 py-4">
-                      {p.category ? (
-                        <p className="text-[10px] tracking-[0.25em] text-accent">{p.category.toUpperCase()}</p>
-                      ) : null}
-                      {p.title ? (
-                        <h2 className="mt-1.5 text-lg font-light text-foreground">{p.title}</h2>
-                      ) : null}
-                    </figcaption>
-                  )}
+                  <figcaption className="border-t border-border bg-background px-5 py-4">
+                    <h2 className="text-lg font-light tracking-[0.15em] text-foreground">{p.title.toUpperCase()}</h2>
+                  </figcaption>
                 </figure>
               </Reveal>
             ))}

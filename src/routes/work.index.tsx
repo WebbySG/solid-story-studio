@@ -43,8 +43,7 @@ function WorkPage() {
   const filtered = useMemo(() => {
     return projects.filter((project) => {
       if (project.discipline !== discipline) return false;
-      if (discipline === "Architectural") return project.category === category;
-      return true;
+      return project.category === category;
     });
   }, [discipline, category]);
 
@@ -83,24 +82,22 @@ function WorkPage() {
           </div>
         </Reveal>
 
-        {discipline === "Architectural" ? (
-          <Reveal>
-            <div className="mt-6 flex flex-wrap gap-8">
-              {architecturalCategories.map((item) => (
-                <button
-                  key={item}
-                  onClick={() => setCategory(item)}
-                  className={`relative pb-2 text-xs tracking-[0.2em] transition-colors ${
-                    category === item ? "text-foreground" : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {item.toUpperCase()}
-                  {category === item ? <span className="absolute right-0 bottom-0 left-0 h-px bg-accent" /> : null}
-                </button>
-              ))}
-            </div>
-          </Reveal>
-        ) : null}
+        <Reveal>
+          <div className="mt-6 flex flex-wrap gap-8">
+            {architecturalCategories.map((item) => (
+              <button
+                key={item}
+                onClick={() => setCategory(item)}
+                className={`relative pb-2 text-xs tracking-[0.2em] transition-colors ${
+                  category === item ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {item.toUpperCase()}
+                {category === item ? <span className="absolute right-0 bottom-0 left-0 h-px bg-accent" /> : null}
+              </button>
+            ))}
+          </div>
+        </Reveal>
       </section>
 
       {/* Project grid */}
