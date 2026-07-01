@@ -137,6 +137,29 @@ export const projects: Project[] = [
   },
 ];
 
+  {
+    slug: "legend-restaurant",
+    image: legendIcon.url,
+    title: "Legend Restaurant",
+    discipline: "Interior Design",
+    category: "Commercial",
+    location: "Singapore",
+    client: "Legend",
+    description: [
+      "Legend Restaurant at CIMB Plaza is a nostalgic dining concept designed in collaboration with ex-Singapore MasterChef finalist Aaron Wong. Inspired by Singapore's 1980s street food culture, the interior recreates the warmth and charm of old coffee shops, hawker stalls, and night markets.",
+      "Orange paper lanterns, timber finishes, clay roof tiles, exposed bulbs, vintage signage, and a pushcart-style counter come together to create an immersive old-school atmosphere. The simple tables and stools reflect the casual, communal spirit of local dining, while the warm lighting and rustic details bring a sense of familiarity and memory.",
+      "The result is a lively and character-filled restaurant that celebrates Singapore's food heritage, where design and cuisine work together to offer diners a nostalgic yet memorable experience.",
+    ],
+    gallery: [legendIcon.url, legend2.url, legend3.url, legend4.url, legend5.url, legend6.url, legend7.url],
+    facts: [
+      { label: "Location", value: "Singapore" },
+      { label: "Client", value: "Legend" },
+      { label: "Discipline", value: "Interior Design" },
+      { label: "Category", value: "Commercial" },
+    ],
+  },
+];
+
 export function getProject(slug: string) {
   return projects.find((p) => p.slug === slug);
 }
