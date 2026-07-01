@@ -5,14 +5,14 @@ export function Footer() {
     <footer className="border-t border-border bg-primary py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid gap-12 md:grid-cols-3">
-          <div>
+          <div className="flex flex-col items-center text-center">
             <img src={logoLightAsset.url} alt="APdS Architects" className="h-8 w-auto" />
             <p className="mt-4 max-w-sm text-xs leading-relaxed text-primary-foreground/60">
               Architectural and interior design practice crafting thoughtful spaces with clarity, material warmth, and strong responses to site.
             </p>
           </div>
 
-          <div>
+          <div className="flex flex-col items-center text-center">
             <h4 className="text-xs tracking-[0.2em] text-primary-foreground/40">CONTACT</h4>
             <div className="mt-4 flex flex-col gap-2 text-xs text-primary-foreground/60">
               <p>118 Joo Chiat Road #02-01, Singapore 427407</p>
@@ -22,7 +22,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div>
+          <div className="flex flex-col items-center text-center">
             <h4 className="text-xs tracking-[0.2em] text-primary-foreground/40">FOLLOW</h4>
             <div className="mt-4 flex flex-col gap-2 text-xs text-primary-foreground/60">
               <a href="https://www.linkedin.com/company/apds-architects/" target="_blank" rel="noreferrer" className="transition-colors hover:text-primary-foreground">
