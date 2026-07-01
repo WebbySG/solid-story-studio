@@ -6,7 +6,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid gap-12 md:grid-cols-3">
           <div className="flex flex-col items-center text-center">
-            <img src={logoLightAsset.url} alt="APdS Architects" className="h-8 w-auto" />
+            <img src={logoLightAsset.url} alt="APdS Architects" className="h-16 w-auto" />
             <p className="mt-4 max-w-sm text-xs leading-relaxed text-primary-foreground/60">
               Architectural and interior design practice crafting thoughtful spaces with clarity, material warmth, and strong responses to site.
             </p>

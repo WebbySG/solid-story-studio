@@ -336,10 +336,9 @@ function AboutPage() {
       {/* Stats */}
       <RevealSection>
         <section className="relative bg-primary py-20 overflow-hidden">
-          <div className="absolute top-0 left-[20%] h-full w-px bg-copper/15" />
-          <div className="absolute top-0 left-[40%] h-full w-px bg-copper/15" />
-          <div className="absolute top-0 left-[60%] h-full w-px bg-copper/15" />
-          <div className="absolute top-0 left-[80%] h-full w-px bg-copper/15" />
+          <div className="absolute top-0 left-[25%] h-full w-px bg-copper/15" />
+          <div className="absolute top-0 left-[50%] h-full w-px bg-copper/15" />
+          <div className="absolute top-0 left-[75%] h-full w-px bg-copper/15" />
           <div className="mx-auto grid max-w-5xl gap-10 px-6 text-center md:grid-cols-4">
             {[
               { number: "20+", label: "Years Experience" },
