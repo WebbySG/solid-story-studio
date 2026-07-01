@@ -15,6 +15,11 @@ import jalanParas7976 from "@/assets/jalan-paras-7976.png.asset.json";
 import jalanParas7981 from "@/assets/jalan-paras-7981.png.asset.json";
 import jalanParas7986 from "@/assets/jalan-paras-7986.png.asset.json";
 import jalanParas7987 from "@/assets/jalan-paras-7987.png.asset.json";
+import ourBar0 from "@/assets/our-bar-0-icon.png.asset.json";
+import ourBar2 from "@/assets/our-bar-2-2.png.asset.json";
+import ourBar3 from "@/assets/our-bar-3-2.png.asset.json";
+import ourBar4 from "@/assets/our-bar-4.png.asset.json";
+import ourBar5 from "@/assets/our-bar-5.png.asset.json";
 
 export type ProjectDiscipline = "Architectural" | "Interior Design";
 export type ProjectCategory = "Residential" | "Commercial" | "Institutional";
